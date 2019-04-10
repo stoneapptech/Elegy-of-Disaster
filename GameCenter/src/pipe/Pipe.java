@@ -1,3 +1,10 @@
+package pipe;
+
+import card.Card;
+import character.Character;
+import client.Client;
+import gameCenter.GameCenter;
+
 public class Pipe {
 
     private GameCenter center;
@@ -15,15 +22,8 @@ public class Pipe {
         this.center = center;
     }
 
-    //message methods
-    //message to client
-    public void sendAttacked() {
-        client.attacked();
-    }
-
-    //message to center
-    public void playCard(Card card) {
-        center.playCard(card);
+    public Character getCharacter() {
+        return client.getCharacter();
     }
 
 

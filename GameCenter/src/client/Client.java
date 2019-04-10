@@ -1,4 +1,13 @@
-abstract class Client {
+package client;
+
+import character.Character;
+
+public abstract class Client {
+
+    Client(Character character) {
+        this.character = character;
+    }
+
     abstract void onAttacked();
     abstract void onAskedDraw();
     abstract void onDropCard();
@@ -9,6 +18,9 @@ abstract class Client {
     abstract void onHealed();
     abstract void onAskedDefend();
     abstract void onChooseCard();
-}
 
-class FuckingClient extends Client {}
+    private Character character;
+    public Character getCharacter() {
+        return character;
+    }
+}
