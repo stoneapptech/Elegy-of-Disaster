@@ -1,5 +1,9 @@
-abstract class GameCenter {
-    abstract void playCard(Card card);
+import java.util.ArrayList;
 
-    Pipe pipe = new Pipe(this);
+abstract class GameCenter {
+    //an array representing pipes
+    private ArrayList<Pipe> pipes;
+    //an array representing each players hands
+    private ArrayList<ArrayList<Card>> hands;
+
 }
