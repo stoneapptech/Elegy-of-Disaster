@@ -25,15 +25,13 @@ public abstract class Client {
         this.inputMethod = inputMethod;
     }
 
-    public abstract void onAttacked();
-    public abstract void onAskedDraw();
-    public abstract void onDropCard();
+    public abstract void onAskedAddToHand(ArrayList<Card> cards);
+    public abstract void onDropCard(Card card);
     public abstract void fuckOff();
-    public abstract void onDrawCard();
     public abstract void onPoisoned();
-    public abstract void onDamaged();
-    public abstract void onHealed();
-    public abstract void onAskedDefend();
+    public abstract void onDamaged(int damage);
+    public abstract void onHealed(int life);
+    public abstract void onAskedDefend(ArrayList<Card> handDefensive);
     public abstract void onChooseCard(ArrayList<Card> hand);
     public abstract void onReceivedCard(Card card);
     public void onNextTurn() {

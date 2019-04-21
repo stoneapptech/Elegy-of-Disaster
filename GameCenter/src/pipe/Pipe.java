@@ -56,6 +56,14 @@ public class Pipe {
         center.onClientPlayCard(number);
     }
 
+    public void playDefensiveCard(int number) {
+
+    }
+
+    public void addCardToHand(int number) {
+
+    }
+
     @Override
     public String toString() {
         return "Pipe: " + client.getCharacter().getName();

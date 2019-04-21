@@ -1,7 +1,5 @@
 package card;
 
-import org.jetbrains.annotations.Contract;
-
 public abstract class Card {
     public abstract String getName();
     protected abstract int getId();
