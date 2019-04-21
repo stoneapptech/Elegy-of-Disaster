@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class DoubleReturn extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "正作";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 

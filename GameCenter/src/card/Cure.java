@@ -2,7 +2,12 @@ package card;
 
 public class Cure extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "治癒";
+    }
+
+    @Override
+    protected int getId() {
+        return 3;
     }
 }

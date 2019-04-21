@@ -2,7 +2,12 @@ package card;
 
 public class Counter extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "反制";
+    }
+
+    @Override
+    protected int getId() {
+        return 23;
     }
 }

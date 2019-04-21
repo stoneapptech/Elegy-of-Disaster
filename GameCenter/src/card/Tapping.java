@@ -2,7 +2,12 @@ package card;
 
 public class Tapping extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "竊聽";
+    }
+
+    @Override
+    protected int getId() {
+        return 13;
     }
 }

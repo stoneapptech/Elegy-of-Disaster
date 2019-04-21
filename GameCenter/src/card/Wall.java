@@ -3,7 +3,12 @@ package card;
 public class Wall extends Card {
 
     @Override
-    String getName() {
+    public String getName() {
         return "掩體";
+    }
+
+    @Override
+    protected int getId() {
+        return 17;
     }
 }

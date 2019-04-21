@@ -1,60 +1,86 @@
 package client;
 
+import card.Card;
 import character.Character;
+import io.Input;
+import io.Output;
+
+import java.util.ArrayList;
 
 public class StandAloneClient extends Client {
 
-    public StandAloneClient(Character character) {
-        super(character);
+    public StandAloneClient(Character character, Output output, Input input) {
+        super(character, output, input);
     }
 
     @Override
-    void onAttacked() {
-
-    }
-
-    @Override
-    void onAskedDraw() {
+    public void onAttacked() {
 
     }
 
     @Override
-    void onDropCard() {
+    public void onAskedDraw() {
 
     }
 
     @Override
-    void fuckOff() {
+    public void onDropCard() {
 
     }
 
     @Override
-    void onDrawCard() {
+    public void fuckOff() {
 
     }
 
     @Override
-    void onPoisoned() {
+    public void onDrawCard() {
 
     }
 
     @Override
-    void onDamaged() {
+    public void onPoisoned() {
 
     }
 
     @Override
-    void onHealed() {
+    public void onDamaged() {
 
     }
 
     @Override
-    void onAskedDefend() {
+    public void onHealed() {
 
     }
 
     @Override
-    void onChooseCard() {
+    public void onAskedDefend() {
 
+    }
+
+    @Override
+    public void onChooseCard(ArrayList<Card> hand) {
+        for (int i = 0; i < hand.size(); i++) {
+            outputMethod.send((i + 1) + "." + hand.get(i).getName());
+        }
+        while(true) {
+            int num = inputMethod.getNumber();
+            if(num == 0) {
+                break;
+            } else if(num > 0 && num <= hand.size()) {
+                pipe.playCard(num);
+            }
+        }
+    }
+
+    @Override
+    public void onReceivedCard(Card card) {
+        outputMethod.send(character.getName() + "抽到了" + card.getName());
+    }
+
+    @Override
+    public void onNextTurn() {
+        super.onNextTurn();
+        outputMethod.send(character.getName() + "的第" + turn + "回合");
     }
 }

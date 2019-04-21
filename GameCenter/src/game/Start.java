@@ -57,7 +57,7 @@ public class Start {
 
         outputMethod.send("角色列表：");
         for(int i = 0; i < characterNames.length; i++) {
-            outputMethod.send(i + ". " + characterNames[i]);
+            outputMethod.send(i+1 + ". " + characterNames[i]);
         }
 
         Character player1;
@@ -97,9 +97,9 @@ public class Start {
 
         outputMethod.send(player1.getName() + "先攻");
 
-        Client client1 = new StandAloneClient(player1);
-        Client client2 = new StandAloneClient(player2);
-        GameCenter center = new TwoPlayerGameCenter(client1, client2);
-        center.begin();
+        Client client1 = new StandAloneClient(player1, outputMethod, inputMethod);
+        Client client2 = new StandAloneClient(player2, outputMethod, inputMethod);
+        GameCenter center = new TwoPlayerGameCenter();
+        center.begin(client1, client2);
     }
 }

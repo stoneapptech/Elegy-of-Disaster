@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class Transcender extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "小兔";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 12;
     }
 

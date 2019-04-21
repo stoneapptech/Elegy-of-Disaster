@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class PuppetHouse extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "卡夫卡";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 

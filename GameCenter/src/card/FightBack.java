@@ -2,7 +2,12 @@ package card;
 
 public class FightBack extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "還擊";
+    }
+
+    @Override
+    protected int getId() {
+        return 12;
     }
 }

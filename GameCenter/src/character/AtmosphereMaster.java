@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 public class AtmosphereMaster extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "銀";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 
     @Override
-    ArrayList<Card> getInitialDeck() {
-        return null;
+    int[] getDeckCardsCount() {
+        return new int[]{5, 3, 5, 5, 7, 5, 3, 5, 0, 2, 0, 0, 2};
     }
 }

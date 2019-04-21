@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class FlamedHeart extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "海爾";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 12;
     }
 

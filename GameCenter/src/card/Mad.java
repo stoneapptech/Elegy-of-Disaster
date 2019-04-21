@@ -2,7 +2,12 @@ package card;
 
 public class Mad extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "狂亂";
+    }
+
+    @Override
+    protected int getId() {
+        return 22;
     }
 }

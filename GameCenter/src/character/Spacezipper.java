@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class Spacezipper extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "圭月";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 

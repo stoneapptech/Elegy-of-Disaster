@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class GodSight extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "安";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 

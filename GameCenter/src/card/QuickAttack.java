@@ -2,7 +2,12 @@ package card;
 
 public class QuickAttack extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "奇襲";
+    }
+
+    @Override
+    protected int getId() {
+        return 6;
     }
 }

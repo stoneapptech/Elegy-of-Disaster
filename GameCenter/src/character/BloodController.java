@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class BloodController extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "梅";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 15;
     }
 

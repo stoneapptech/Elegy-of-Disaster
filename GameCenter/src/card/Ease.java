@@ -2,7 +2,12 @@ package card;
 
 public class Ease extends Card {
     @Override
-    String getName() {
+    public String getName() {
         return "從容";
+    }
+
+    @Override
+    protected int getId() {
+        return 14;
     }
 }

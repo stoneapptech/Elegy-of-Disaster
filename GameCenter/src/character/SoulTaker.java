@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class SoulTaker extends Character {
     @Override
-    String getName() {
+    public String getName() {
         return "桑德";
     }
 
     @Override
-    int getLife() {
+    public int getLife() {
         return 10;
     }
 
