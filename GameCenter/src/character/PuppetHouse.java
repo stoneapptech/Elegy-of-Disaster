@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class PuppetHouse extends Character {
-    @Override
-    public String getName() {
-        return "卡夫卡";
+
+    public PuppetHouse() {
+        super(15);
     }
 
     @Override
-    public int getLife() {
-        return 15;
+    public String getName() {
+        return "卡夫卡";
     }
 
     @Override

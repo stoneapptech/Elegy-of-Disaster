@@ -6,14 +6,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class BloodController extends Character {
-    @Override
-    public String getName() {
-        return "梅";
+
+    public BloodController() {
+        super(15);
     }
 
     @Override
-    public int getLife() {
-        return 15;
+    public String getName() {
+        return "梅";
     }
 
     @Override

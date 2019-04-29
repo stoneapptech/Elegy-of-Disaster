@@ -1,7 +1,9 @@
 package gameCenter;
 
 import card.Card;
+import card.Cure;
 import client.Client;
+import effect.Effect;
 import exceptions.NoOneLostException;
 
 import pipe.Pipe;
@@ -24,8 +26,10 @@ public abstract class GameCenter {
 
     //an array representing pipes
     private Pipes pipes = new Pipes();
-    //an array representing each players hands
-    private ArrayList<Card>[] hands;
+    //an hash map representing each players hands
+    //key: pipe
+    //value: hands
+    private HashMap<Pipe, ArrayList<Card>> hands;
     //use this map to record the order of players
     //the value is the next player after the key
     private HashMap<Pipe, Pipe> players = new HashMap<>();
@@ -42,7 +46,7 @@ public abstract class GameCenter {
             pipes.add(p);
             clients[i].pipe = p;
         }
-        hands = new ArrayList[getPipesCount()];
+        hands = new HashMap<>();
         for (int i = 0; i < getPipesCount(); i++) {
             ArrayList<Card> deck = pipes.get(i).getCharacter().getDeck();
             ArrayList<Card> hand = new ArrayList<>(3);
@@ -53,7 +57,7 @@ public abstract class GameCenter {
                 hand.add(c);
                 pipes.get(i).receivedCard(c);
             }
-            hands[i] = hand;
+            hands.put(pipes.get(i), hand);
         }
 
         for(int i = 0; i < getPipesCount(); i++) {
@@ -75,21 +79,31 @@ public abstract class GameCenter {
             current = nextPlayer(current);
             current.startNextTurn();
 
-            int playerIndex = pipes.indexOf(current);
             Card card = drawCard(current.getCharacter().getDeck());
 
             current.receivedCard(card);
             current.getCharacter().getDeck().remove(card);
-            hands[playerIndex].add(card);
+            hands.get(current).add(card);
 
             current.displayLife();
             current.send("請出牌:(或輸入0放棄)");
-            current.requirePlayCard(hands[playerIndex]);
+            current.requirePlayCard(hands.get(current));
         }
     }
 
     public void onClientPlayCard(int number) {
+        ArrayList<Card> currentHand = hands.get(current);
+        Cure c = (Cure)currentHand.get(number-1);
+        c.applyEffects(current, players, this);
+    }
 
+    //broadcast methods for pipe
+    public void characterHealed(int life, Pipe healed) {
+        for(Pipe p: pipes) {
+            if(p != healed) {
+                p.send(healed.client.getCharacter().getName() + "回復了" + life + "點生命值");
+            }
+        }
     }
 
     private boolean isSomeoneLost() {

@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class SoulTaker extends Character {
-    @Override
-    public String getName() {
-        return "桑德";
+
+    public SoulTaker() {
+        super(10);
     }
 
     @Override
-    public int getLife() {
-        return 10;
+    public String getName() {
+        return "桑德";
     }
 
     @Override

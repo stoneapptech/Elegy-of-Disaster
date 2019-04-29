@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class Transcender extends Character {
-    @Override
-    public String getName() {
-        return "小兔";
+
+    public Transcender() {
+        super(12);
     }
 
     @Override
-    public int getLife() {
-        return 12;
+    public String getName() {
+        return "小兔";
     }
 
     @Override

@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class Mousetrap extends Character {
-    @Override
-    public String getName() {
-        return "W";
+
+    public Mousetrap() {
+        super(12);
     }
 
     @Override
-    public int getLife() {
-        return 12;
+    public String getName() {
+        return "W";
     }
 
     @Override

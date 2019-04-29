@@ -42,7 +42,7 @@ public abstract class Client {
         outputMethod.send("生命值: " + character.getLife());
     }
     public void onMessage(String message) {
-        outputMethod.send(message);
+        outputMethod.send(character.getName() + ":\n" + message);
     }
     public int getCharacterLife() {
         return character.getLife();

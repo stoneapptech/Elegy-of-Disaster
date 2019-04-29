@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class DoubleReturn extends Character {
-    @Override
-    public String getName() {
-        return "正作";
+
+    public DoubleReturn() {
+        super(15);
     }
 
     @Override
-    public int getLife() {
-        return 15;
+    public String getName() {
+        return "正作";
     }
 
     @Override

@@ -6,14 +6,13 @@ import io.Input;
 import io.Output;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class StandAloneClient extends Client {
 
     public StandAloneClient(Character character, Output output, Input input) {
         super(character, output, input);
     }
-
-
 
     @Override
     public void onAskedAddToHand(ArrayList<Card> cards) {
@@ -58,9 +57,7 @@ public class StandAloneClient extends Client {
     @Override
     public void onAskedDefend(ArrayList<Card> handDefensive) {
         outputMethod.send("請問要防禦嗎？不防禦請輸入0 ");
-        for (int i = 0; i < handDefensive.size(); i++) {
-            outputMethod.send((i + 1) + "." + handDefensive.get(i).getName());
-        }
+        showCards(handDefensive);
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
@@ -73,9 +70,7 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onChooseCard(ArrayList<Card> hand) {
-        for (int i = 0; i < hand.size(); i++) {
-            outputMethod.send((i + 1) + "." + hand.get(i).getName());
-        }
+        showCards(hand);
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
@@ -83,6 +78,12 @@ public class StandAloneClient extends Client {
             } else if(num > 0 && num <= hand.size()) {
                 pipe.playCard(num);
             }
+        }
+    }
+
+    private void showCards(ArrayList<Card> cards) {
+        for (int i = 0; i < cards.size(); i++) {
+            outputMethod.send((i + 1) + "." + cards.get(i).getName());
         }
     }
 

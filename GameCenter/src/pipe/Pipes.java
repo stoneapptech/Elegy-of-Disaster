@@ -3,6 +3,7 @@ package pipe;
 import java.util.ArrayList;
 
 public class Pipes extends ArrayList<Pipe> {
+
     public void broadcast(String message) {
         for(Pipe p: this) {
             p.send(message);

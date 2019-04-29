@@ -4,23 +4,18 @@ import card.Card;
 import character.Character;
 import client.Client;
 import gameCenter.GameCenter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class Pipe {
 
     private GameCenter center;
-    private Client client;
-    public void setClient(Client client) {
-        this.client = client;
-    }
+    public Client client;
 
     public Pipe(GameCenter center, Client client) {
         this.center = center;
         this.client = client;
-    }
-    public Pipe(GameCenter center) {
-        this.center = center;
     }
 
     //method for GameCenter
@@ -40,11 +35,9 @@ public class Pipe {
     public void startNextTurn() {
         client.onNextTurn();
     }
-
     public void displayLife() {
         client.displayLife();
     }
-
     public void requirePlayCard(ArrayList<Card> hand) {
         client.onChooseCard(hand);
     }
@@ -55,13 +48,20 @@ public class Pipe {
     public void playCard(int number) {
         center.onClientPlayCard(number);
     }
-
     public void playDefensiveCard(int number) {
 
     }
-
     public void addCardToHand(int number) {
 
+    }
+
+    //method for Effect and Card
+    //which means it interact with Client
+    //Caution: these methods might change Client's property
+    //Use them properly to avoid unpredictable results
+    public void increaseLife(int num) {
+        client.onHealed(num);
+        center.characterHealed(num, this);
     }
 
     @Override

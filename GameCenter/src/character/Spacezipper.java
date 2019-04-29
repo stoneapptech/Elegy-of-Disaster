@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class Spacezipper extends Character {
-    @Override
-    public String getName() {
-        return "圭月";
+
+    public Spacezipper() {
+        super(15);
     }
 
     @Override
-    public int getLife() {
-        return 15;
+    public String getName() {
+        return "圭月";
     }
 
     @Override

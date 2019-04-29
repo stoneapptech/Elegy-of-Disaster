@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class FrozenHeart extends Character {
-    @Override
-    public String getName() {
-        return "雪村";
+
+    public FrozenHeart() {
+        super(18);
     }
 
     @Override
-    public int getLife() {
-        return 18;
+    public String getName() {
+        return "雪村";
     }
 
     @Override

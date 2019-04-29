@@ -6,9 +6,19 @@ import java.util.Collection;
 import java.util.Collections;
 
 public abstract class Character {
+
+    protected int life;
+    protected Character(int life) {
+        this.life = life;
+    }
     public abstract String getName();
-    public abstract int getLife();
+    public int getLife() {
+        return life;
+    }
     abstract int[] getDeckCardsCount();
+    public void increaseLife() {
+        life += 1;
+    }
 
     private ArrayList<Card> deck = null;
     public ArrayList<Card> getDeck() {

@@ -1,6 +1,5 @@
 package io;
 
-import org.omg.CORBA.Any;
 import java.util.Collection;
 
 public class StandAloneOutputMethod implements Output {

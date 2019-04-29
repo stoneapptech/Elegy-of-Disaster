@@ -5,14 +5,14 @@ import card.Card;
 import java.util.ArrayList;
 
 public class GodSight extends Character {
-    @Override
-    public String getName() {
-        return "安";
+
+    public GodSight() {
+        super(15);
     }
 
     @Override
-    public int getLife() {
-        return 15;
+    public String getName() {
+        return "安";
     }
 
     @Override
