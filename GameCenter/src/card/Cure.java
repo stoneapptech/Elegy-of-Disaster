@@ -19,17 +19,23 @@ public class Cure extends Card {
 
     @Override
     protected int getId() {
-        return 3;
+        return 2;
     }
 
+    @Override
     public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         for(Effect e: getEffect(current)) {
             e.invoke();
         }
     }
 
-    public ArrayList<Effect> getEffect(Pipe subject) {
-        Effect[] effects = {new AddLife(subject), new AddLife(subject)};
+    @Override
+    public int getCost() {
+        return 1;
+    }
+
+    private ArrayList<Effect> getEffect(Pipe subject) {
+        Effect[] effects = {new AddLife(2, subject)};
         return new ArrayList<>(Arrays.asList(effects));
     }
 }

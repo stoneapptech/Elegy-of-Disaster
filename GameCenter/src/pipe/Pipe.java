@@ -3,6 +3,7 @@ package pipe;
 import card.Card;
 import character.Character;
 import client.Client;
+import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,8 +39,11 @@ public class Pipe {
     public void displayLife() {
         client.displayLife();
     }
-    public void requirePlayCard(ArrayList<Card> hand) {
+    public void requirePlayCard(ArrayList<Card> hand) throws ChooseZeroException {
         client.onChooseCard(hand);
+    }
+    public int getAvailableCost() {
+        return client.getAvailableCost();
     }
 
     //method for Client
@@ -62,6 +66,10 @@ public class Pipe {
     public void increaseLife(int num) {
         client.onHealed(num);
         center.characterHealed(num, this);
+    }
+
+    public void decreaseLife(int num) {
+        client.onDamaged(num);
     }
 
     @Override

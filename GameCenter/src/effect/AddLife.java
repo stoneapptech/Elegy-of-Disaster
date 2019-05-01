@@ -8,14 +8,16 @@ import pipe.Pipe;
 public class AddLife extends Effect {
 
     private Pipe subject;
+    private int life;
 
     //add life only take the first characters as subject
-    public AddLife(Pipe... pipes) {
-        subject = pipes[0];
+    public AddLife(int life, Pipe pipe) {
+        subject = pipe;
+        this.life = life;
     }
 
     @Override
     public void invoke() {
-        subject.increaseLife(1);
+        subject.increaseLife(life);
     }
 }

@@ -2,6 +2,7 @@ package client;
 
 import card.Card;
 import character.Character;
+import exceptions.ChooseZeroException;
 import io.Input;
 import io.Output;
 import pipe.Pipe;
@@ -17,6 +18,7 @@ public abstract class Client {
     protected Output outputMethod;
     protected Input inputMethod;
     protected int turn = 0;
+    protected int cost = 0;
     public Pipe pipe;
 
     Client(Character character, Output outputMethod, Input inputMethod) {
@@ -32,12 +34,17 @@ public abstract class Client {
     public abstract void onDamaged(int damage);
     public abstract void onHealed(int life);
     public abstract void onAskedDefend(ArrayList<Card> handDefensive);
-    public abstract void onChooseCard(ArrayList<Card> hand);
+    public abstract void onChooseCard(ArrayList<Card> hand) throws ChooseZeroException;
     public abstract void onReceivedCard(Card card);
     public void onNextTurn() {
         turn++;
+        cost = turn>2 ? 3:turn;
     }
 
+
+    public int getAvailableCost() {
+        return cost;
+    }
     public void displayLife() {
         outputMethod.send("生命值: " + character.getLife());
     }

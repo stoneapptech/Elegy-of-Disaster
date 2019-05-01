@@ -4,6 +4,7 @@ import card.Card;
 import card.Cure;
 import client.Client;
 import effect.Effect;
+import exceptions.ChooseZeroException;
 import exceptions.NoOneLostException;
 
 import pipe.Pipe;
@@ -87,14 +88,21 @@ public abstract class GameCenter {
 
             current.displayLife();
             current.send("請出牌:(或輸入0放棄)");
-            current.requirePlayCard(hands.get(current));
+            while(current.getAvailableCost() != 0) {
+                current.send("剩餘cost:" + current.getAvailableCost());
+                try {
+                    current.requirePlayCard(hands.get(current));
+                } catch (ChooseZeroException e) {
+                    //user choose zero
+                    break;
+                }
+            }
         }
     }
 
     public void onClientPlayCard(int number) {
-        ArrayList<Card> currentHand = hands.get(current);
-        Cure c = (Cure)currentHand.get(number-1);
-        c.applyEffects(current, players, this);
+        Card card = hands.get(current).get(number-1);
+        card.applyEffects(current, players, this);
     }
 
     //broadcast methods for pipe

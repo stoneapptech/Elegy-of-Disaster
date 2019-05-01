@@ -1,10 +1,5 @@
 package character;
 
-import card.Attack;
-import card.Card;
-
-import java.util.ArrayList;
-
 public class BloodController extends Character {
 
     public BloodController() {

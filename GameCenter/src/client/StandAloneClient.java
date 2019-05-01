@@ -2,6 +2,7 @@ package client;
 
 import card.Card;
 import character.Character;
+import exceptions.ChooseZeroException;
 import io.Input;
 import io.Output;
 
@@ -31,7 +32,7 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onDropCard(Card card) {
-        outputMethod.send(character.getName() + "掉了" + card.getName());
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "掉了" + card.getName());
     }
 
     @Override
@@ -41,22 +42,22 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onPoisoned() {
-        outputMethod.send(character.getName() + "中毒了");
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "中毒了");
     }
 
     @Override
     public void onDamaged(int damage) {
-        outputMethod.send(character.getName() + "受到" + damage +"點傷害");
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "受到" + damage +"點傷害");
     }
 
     @Override
     public void onHealed(int life) {
-        outputMethod.send(character.getName() + "回覆了" + life +"點生命");
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "回覆了" + life +"點生命");
     }
 
     @Override
     public void onAskedDefend(ArrayList<Card> handDefensive) {
-        outputMethod.send("請問要防禦嗎？不防禦請輸入0 ");
+        outputMethod.send(character.getName() + ":\n" + "請問要防禦嗎？不防禦請輸入0 ");
         showCards(handDefensive);
         while(true) {
             int num = inputMethod.getNumber();
@@ -69,14 +70,15 @@ public class StandAloneClient extends Client {
     }
 
     @Override
-    public void onChooseCard(ArrayList<Card> hand) {
+    public void onChooseCard(ArrayList<Card> hand) throws ChooseZeroException {
         showCards(hand);
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
-                break;
+                throw new ChooseZeroException();
             } else if(num > 0 && num <= hand.size()) {
                 pipe.playCard(num);
+                cost -= hand.get(num).getCost();
             }
         }
     }
@@ -89,12 +91,12 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onReceivedCard(Card card) {
-        outputMethod.send(character.getName() + "抽到了" + card.getName());
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "抽到了" + card.getName());
 }
 
     @Override
     public void onNextTurn() {
         super.onNextTurn();
-        outputMethod.send(character.getName() + "的第" + turn + "回合");
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "的第" + turn + "回合");
     }
 }

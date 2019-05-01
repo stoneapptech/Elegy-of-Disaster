@@ -5,10 +5,10 @@ import pipe.Pipe;
 
 import java.util.HashMap;
 
-public class Ease extends Card {
+public class Seperation extends Card {
     @Override
     public String getName() {
-        return "從容";
+        return "離間";
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Ease extends Card {
 
     @Override
     protected int getId() {
-        return 13;
+        return 27;
     }
 }
