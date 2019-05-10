@@ -17,20 +17,28 @@ public abstract class Character {
     }
     abstract int[] getDeckCardsCount();
     public void increaseLife() {
-        life += 1;
+        increaseLifeBy(1);
+    }
+    public void increaseLifeBy(int num) {
+        life += num;
+    }
+    public void decreaseLife() {
+        decreaseLifeBy(1);
+    }
+    public void decreaseLifeBy(int num) {
+        life -= num;
     }
 
     private ArrayList<Card> deck = null;
     public ArrayList<Card> getDeck() {
         if(deck == null) {
             ArrayList<Card> initialDeck = new ArrayList<Card>() {{
-                String[] cards = {"Attack",
-                        "Defense",
+                String[] cards = {"aggressive.Attack",
                         "Cure",
                         "Supply",
                         "TakeOver",
                         "QuickAttack",
-                        "Dodge",
+                        "passive.Dodge",
                         "Strategy",
                         "SpreadAttack",
                         "Bless",

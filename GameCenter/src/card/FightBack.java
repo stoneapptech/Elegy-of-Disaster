@@ -1,24 +1,22 @@
 package card;
 
+import card.passive.PassiveCard;
+import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FightBack extends Card {
+public class FightBack extends PassiveCard {
     @Override
     public String getName() {
         return "還擊";
     }
 
     @Override
-    public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-
-    }
-
-    @Override
-    public int getCost() {
-        return 1;
+    public ArrayList<Effect> getEffects(Pipe current) {
+        return null;
     }
 
     @Override

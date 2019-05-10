@@ -1,6 +1,7 @@
 package card.aggressive;
 
 import card.Card;
+import card.active.ActiveCard;
 import effect.DamageLife;
 import effect.Effect;
 import gameCenter.GameCenter;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Attack extends Card implements AggressiveCard {
+public class Attack extends ActiveCard implements AggressiveCard {
 
     @Override
     public String getName() {
@@ -18,14 +19,8 @@ public class Attack extends Card implements AggressiveCard {
     }
 
     @Override
-    public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        for(Effect e: getEffects(players.get(current))) {
-            e.invoke();
-        }
-    }
-
-    private ArrayList<Effect> getEffects(Pipe subject) {
-        Effect[] effects = {new DamageLife(2, subject)};
+    protected ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        Effect[] effects = {new DamageLife(2, players.get(current))};
         return new ArrayList<>(Arrays.asList(effects));
     }
 

@@ -1,6 +1,9 @@
 package client;
 
+import EODObject.Cards;
 import card.Card;
+import card.active.ActiveCard;
+import card.passive.PassiveCard;
 import character.Character;
 import exceptions.ChooseZeroException;
 import io.Input;
@@ -8,6 +11,7 @@ import io.Output;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class StandAloneClient extends Client {
 
@@ -47,46 +51,61 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onDamaged(int damage) {
+        character.decreaseLifeBy(damage);
         outputMethod.send(character.getName() + ":\n" + character.getName() + "受到" + damage +"點傷害");
     }
 
     @Override
     public void onHealed(int life) {
+        character.increaseLifeBy(life);
         outputMethod.send(character.getName() + ":\n" + character.getName() + "回覆了" + life +"點生命");
     }
 
     @Override
-    public void onAskedDefend(ArrayList<Card> handDefensive) {
+    public void onAskedDefend(Cards handDefensive) {
         outputMethod.send(character.getName() + ":\n" + "請問要防禦嗎？不防禦請輸入0 ");
-        showCards(handDefensive);
+        showCards(handDefensive, card -> card instanceof PassiveCard, "");
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
                 break;
             } else if(num > 0 && num <= handDefensive.size()) {
                 pipe.playDefensiveCard(num);
+                break;
             }
         }
     }
 
     @Override
-    public void onChooseCard(ArrayList<Card> hand) throws ChooseZeroException {
-        showCards(hand);
+    public void onChooseCard(Cards hand) throws ChooseZeroException {
+        showCards(hand, card -> card instanceof ActiveCard, "不可出");
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
                 throw new ChooseZeroException();
             } else if(num > 0 && num <= hand.size()) {
+                if(hand.get(num-1) instanceof PassiveCard) {
+                    continue;
+                }
                 pipe.playCard(num);
-                cost -= hand.get(num).getCost();
+                cost -= ((ActiveCard)hand.get(num-1)).getCost();
+                break;
             }
         }
     }
 
-    private void showCards(ArrayList<Card> cards) {
-        for (int i = 0; i < cards.size(); i++) {
-            outputMethod.send((i + 1) + "." + cards.get(i).getName());
+    private void showCards(Cards cards, Predicate<? super Card> predicate, String message) {
+        for(int i = 0; i < cards.size(); i++) {
+            String output = (i+1) + "." + cards.get(i).getName();
+            if(!predicate.test(cards.get(i))) {
+                output += "(" + message + ")";
+            }
+            outputMethod.send(output);
         }
+    }
+
+    private void showCards(Cards cards) {
+        showCards(cards, x -> true, "");
     }
 
     @Override

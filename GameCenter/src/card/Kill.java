@@ -1,19 +1,22 @@
 package card;
 
+import card.active.ActiveCard;
+import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Kill extends Card {
+public class Kill extends ActiveCard {
     @Override
     public String getName() {
         return "殺意";
     }
 
     @Override
-    public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-
+    public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        return null;
     }
 
     @Override

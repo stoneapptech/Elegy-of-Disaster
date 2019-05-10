@@ -2,6 +2,8 @@ package gameCenter;
 
 import client.Client;
 
+import java.util.stream.IntStream;
+
 public class TwoPlayerGameCenter extends GameCenter {
 
     @Override
@@ -10,7 +12,7 @@ public class TwoPlayerGameCenter extends GameCenter {
     }
 
     @Override
-    int getCost() {
-        return 3;
+    boolean gameShouldEnd() {
+        return IntStream.of(pipes.askingForLifes()).anyMatch(x -> x < 0);
     }
 }

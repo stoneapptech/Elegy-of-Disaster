@@ -17,6 +17,7 @@ public class Spacezipper extends Character {
 
     @Override
     int[] getDeckCardsCount() {
-        return new int[]{7, 5, 5, 5, 5, 5, 3, 3, 1, 1, 1, 1, 1};
+//        return new int[]{7, 5, 5, 5, 5, 5, 3, 3, 1, 1, 1, 1, 1};
+        return new int[]{7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     }
 }

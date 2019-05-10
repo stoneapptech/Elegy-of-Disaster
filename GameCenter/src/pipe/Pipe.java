@@ -1,18 +1,26 @@
 package pipe;
 
+import EODObject.Cards;
 import card.Card;
+import card.active.ActiveCard;
+import card.aggressive.AggressiveCard;
+import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
+import effect.Effect;
 import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.function.Predicate;
 
 public class Pipe {
 
     private GameCenter center;
     public Client client;
+    private ArrayList<Card> cardBuffer = new ArrayList<>();
 
     public Pipe(GameCenter center, Client client) {
         this.center = center;
@@ -39,11 +47,24 @@ public class Pipe {
     public void displayLife() {
         client.displayLife();
     }
-    public void requirePlayCard(ArrayList<Card> hand) throws ChooseZeroException {
+    public void requirePlayCard(Cards hand) throws ChooseZeroException {
         client.onChooseCard(hand);
     }
     public int getAvailableCost() {
         return client.getAvailableCost();
+    }
+    public void askDefend(Cards cards) {
+        client.onAskedDefend(cards);
+    }
+    public void activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        for(Card c: cardBuffer) {
+            if(c instanceof ActiveCard) {
+                ((ActiveCard) c).applyEffects(current, players, center);
+            }
+            if(c instanceof PassiveCard) {
+                ((PassiveCard) c).applyPassiveSkill(current);
+            }
+        }
     }
 
     //method for Client
@@ -53,7 +74,7 @@ public class Pipe {
         center.onClientPlayCard(number);
     }
     public void playDefensiveCard(int number) {
-
+        center.onClientPlayDefensive(number);
     }
     public void addCardToHand(int number) {
 
@@ -70,6 +91,19 @@ public class Pipe {
 
     public void decreaseLife(int num) {
         client.onDamaged(num);
+    }
+
+    public void invalidateAggressive() {
+        cardBuffer.removeIf(card -> card instanceof AggressiveCard);
+    }
+
+
+
+    public void insertCardToBufferHead(Card c) {
+        cardBuffer.add(0, c);
+    }
+    public void appendCardToBuffer(Card c) {
+        cardBuffer.add(c);
     }
 
     @Override

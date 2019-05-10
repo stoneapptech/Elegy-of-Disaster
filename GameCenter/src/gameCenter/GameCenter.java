@@ -1,20 +1,21 @@
 package gameCenter;
 
 import card.Card;
-import card.Cure;
+import card.active.ActiveCard;
+import card.aggressive.AggressiveCard;
+import card.passive.Dodge;
+import card.passive.PassiveCard;
 import client.Client;
-import effect.Effect;
 import exceptions.ChooseZeroException;
 import exceptions.NoOneLostException;
 
 import pipe.Pipe;
 import pipe.Pipes;
 
-import java.lang.reflect.Array;
+import EODObject.Cards;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.function.IntPredicate;
 import java.util.stream.IntStream;
 
 public abstract class GameCenter {
@@ -23,14 +24,14 @@ public abstract class GameCenter {
     public static String lose = "loser: %s";
 
     abstract int getPipesCount();
-    abstract int getCost();
+    abstract boolean gameShouldEnd();
 
     //an array representing pipes
-    private Pipes pipes = new Pipes();
+    protected Pipes pipes = new Pipes();
     //an hash map representing each players hands
     //key: pipe
     //value: hands
-    private HashMap<Pipe, ArrayList<Card>> hands;
+    private HashMap<Pipe, Cards> hands;
     //use this map to record the order of players
     //the value is the next player after the key
     private HashMap<Pipe, Pipe> players = new HashMap<>();
@@ -58,7 +59,7 @@ public abstract class GameCenter {
                 hand.add(c);
                 pipes.get(i).receivedCard(c);
             }
-            hands.put(pipes.get(i), hand);
+            hands.put(pipes.get(i), new Cards(hand));
         }
 
         for(int i = 0; i < getPipesCount(); i++) {
@@ -69,7 +70,7 @@ public abstract class GameCenter {
     private Pipe current = null;
     private void loop() {
         while(true) {
-            if(isSomeoneLost()) {
+            if(gameShouldEnd()) {
                 try {
                     pipes.broadcast(String.format(GameCenter.lose, getLost().toString()));
                     break;
@@ -102,7 +103,23 @@ public abstract class GameCenter {
 
     public void onClientPlayCard(int number) {
         Card card = hands.get(current).get(number-1);
-        card.applyEffects(current, players, this);
+        if(card instanceof ActiveCard) {
+            current.appendCardToBuffer(card);
+        }
+        if(card instanceof AggressiveCard) {
+            Pipe opponent = players.get(current);
+            Cards passive = hands.get(opponent).filter(c -> c instanceof PassiveCard);
+            opponent.askDefend(passive);
+        }
+        current.activateBuffer(current, players, this);
+    }
+
+    public void onClientPlayDefensive(int number) {
+        Pipe opponent = players.get(current);
+        Cards passive = hands.get(opponent).filter(c -> c instanceof PassiveCard);
+        Card chosen = passive.get(number-1);
+        current.insertCardToBufferHead(chosen);
+        current.activateBuffer(current, players, this);
     }
 
     //broadcast methods for pipe
@@ -112,10 +129,6 @@ public abstract class GameCenter {
                 p.send(healed.client.getCharacter().getName() + "回復了" + life + "點生命值");
             }
         }
-    }
-
-    private boolean isSomeoneLost() {
-        return IntStream.of(pipes.askingForLifes()).anyMatch(x -> x < 0);
     }
     //get the lost one
     private Pipe getLost() throws NoOneLostException {

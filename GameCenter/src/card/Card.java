@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 public abstract class Card {
     public abstract String getName();
-    public abstract void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center);
-    public abstract int getCost();
     protected abstract int getId();
 
     @Override

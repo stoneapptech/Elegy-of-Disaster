@@ -1,5 +1,6 @@
 package card;
 
+import card.active.ActiveCard;
 import character.Character;
 import client.Client;
 import effect.AddLife;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Cure extends Card {
+public class Cure extends ActiveCard {
     @Override
     public String getName() {
         return "治癒";
@@ -23,19 +24,13 @@ public class Cure extends Card {
     }
 
     @Override
-    public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        for(Effect e: getEffect(current)) {
-            e.invoke();
-        }
+    protected ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        Effect[] effects = {new AddLife(2, current)};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override
     public int getCost() {
         return 1;
-    }
-
-    private ArrayList<Effect> getEffect(Pipe subject) {
-        Effect[] effects = {new AddLife(2, subject)};
-        return new ArrayList<>(Arrays.asList(effects));
     }
 }
