@@ -25,6 +25,7 @@ public abstract class GameCenter {
 
     abstract int getPipesCount();
     abstract boolean gameShouldEnd();
+    abstract Pipe getLost() throws NoOneLostException;
 
     //an array representing pipes
     protected Pipes pipes = new Pipes();
@@ -50,16 +51,16 @@ public abstract class GameCenter {
         }
         hands = new HashMap<>();
         for (int i = 0; i < getPipesCount(); i++) {
-            ArrayList<Card> deck = pipes.get(i).getCharacter().getDeck();
-            ArrayList<Card> hand = new ArrayList<>(3);
-            ArrayList<Card> cards = drawCard(deck, 3);
+            Cards deck = pipes.get(i).getCharacter().getDeck();
+            Cards hand = new Cards();
+            Cards cards = drawCard(deck, 3);
             for(int j = 0; j < 3; j++) {
                 Card c = cards.get(j);
                 deck.remove(c);
                 hand.add(c);
                 pipes.get(i).receivedCard(c);
             }
-            hands.put(pipes.get(i), new Cards(hand));
+            hands.put(pipes.get(i), hand);
         }
 
         for(int i = 0; i < getPipesCount(); i++) {
@@ -121,6 +122,15 @@ public abstract class GameCenter {
         current.insertCardToBufferHead(chosen);
         current.activateBuffer(current, players, this);
     }
+    
+    public void onAskedToDrawCard(int number) {
+        Cards c = drawCard(current.getCharacter().getDeck(), number);
+        hands.get(current).add(c);
+        for(Card card: c) {
+            current.getCharacter().getDeck().remove(card);
+        }
+        current.receivedCards(c);
+    }
 
     //broadcast methods for pipe
     public void characterHealed(int life, Pipe healed) {
@@ -130,28 +140,17 @@ public abstract class GameCenter {
             }
         }
     }
-    //get the lost one
-    private Pipe getLost() throws NoOneLostException {
-        try {
-            int lose = IntStream.of(pipes.askingForLifes()).filter(x -> x < 0).toArray()[0];
-            return pipes.get(lose);
-        } catch (IndexOutOfBoundsException e) {
-            throw new NoOneLostException();
-        }
-
-
-    }
     private Pipe nextPlayer(Pipe current) {
         return players.getOrDefault(current, pipes.get(0));
     }
 
     //These are not destructive
     //Please remove the cards from deck and add cards to hand manually
-    private Card drawCard(ArrayList<Card> fromCards) {
+    private Card drawCard(Cards fromCards) {
         return drawCard(fromCards, 1).get(0);
     }
-    private ArrayList<Card> drawCard(ArrayList<Card> fromCards, int num) {
-        ArrayList<Card> cards = new ArrayList<>(num);
+    private Cards drawCard(Cards fromCards, int num) {
+        Cards cards = new Cards();
         for(int j = 0; j < num; j++) {
             Card card = fromCards.get(j);
             cards.add(card);

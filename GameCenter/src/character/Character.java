@@ -1,6 +1,9 @@
 package character;
 
+import EODObject.Cards;
 import card.Card;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,13 +32,13 @@ public abstract class Character {
         life -= num;
     }
 
-    private ArrayList<Card> deck = null;
-    public ArrayList<Card> getDeck() {
+    private Cards deck = null;
+    public Cards getDeck() {
         if(deck == null) {
             ArrayList<Card> initialDeck = new ArrayList<Card>() {{
                 String[] cards = {"aggressive.Attack",
                         "Cure",
-                        "Supply",
+                        "active.Supply",
                         "TakeOver",
                         "QuickAttack",
                         "passive.Dodge",
@@ -57,7 +60,7 @@ public abstract class Character {
                 }
             }};
             Collections.shuffle(initialDeck);
-            deck = initialDeck;
+            deck = new Cards(initialDeck);
         }
         return deck;
     }

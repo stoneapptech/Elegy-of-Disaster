@@ -41,6 +41,11 @@ public class Pipe {
     public void receivedCard(Card card) {
         client.onReceivedCard(card);
     }
+    public void receivedCards(Cards cards) {
+        for(Card c: cards) {
+            client.onReceivedCard(c);
+        }
+    }
     public void startNextTurn() {
         client.onNextTurn();
     }
@@ -77,7 +82,6 @@ public class Pipe {
         center.onClientPlayDefensive(number);
     }
     public void addCardToHand(int number) {
-
     }
 
     //method for Effect and Card
@@ -97,7 +101,9 @@ public class Pipe {
         cardBuffer.removeIf(card -> card instanceof AggressiveCard);
     }
 
-
+    public void drawCard(int num) {
+        center.onAskedToDrawCard(num);
+    }
 
     public void insertCardToBufferHead(Card c) {
         cardBuffer.add(0, c);
