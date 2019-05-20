@@ -87,8 +87,8 @@ public class StandAloneClient extends Client {
                 if(hand.get(num-1) instanceof PassiveCard) {
                     continue;
                 }
-                pipe.playCard(num);
                 cost -= ((ActiveCard)hand.get(num-1)).getCost();
+                pipe.playCard(num);
                 break;
             }
         }

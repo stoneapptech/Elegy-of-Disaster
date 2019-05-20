@@ -110,9 +110,12 @@ public abstract class GameCenter {
         if(card instanceof AggressiveCard) {
             Pipe opponent = players.get(current);
             Cards passive = hands.get(opponent).filter(c -> c instanceof PassiveCard);
-            opponent.askDefend(passive);
+            if(passive.isNotEmpty()) {
+                opponent.askDefend(passive);
+            }
         }
         current.activateBuffer(current, players, this);
+        hands.get(current).remove(number-1);
     }
 
     public void onClientPlayDefensive(int number) {
@@ -120,7 +123,7 @@ public abstract class GameCenter {
         Cards passive = hands.get(opponent).filter(c -> c instanceof PassiveCard);
         Card chosen = passive.get(number-1);
         current.insertCardToBufferHead(chosen);
-        current.activateBuffer(current, players, this);
+        hands.get(opponent).remove(chosen);
     }
     
     public void onAskedToDrawCard(int number) {
@@ -144,10 +147,11 @@ public abstract class GameCenter {
         return players.getOrDefault(current, pipes.get(0));
     }
 
-    public void loseCardOn(Pipe pipe) {
+    public Card loseCardOn(Pipe pipe) {
         Cards cards = hands.get(pipe);
         Card lost = cards.removeRandomly();
         pipe.onLoseCard(lost);
+        return lost;
     }
     //These are not destructive
     //Please remove the cards from deck and add cards to hand manually

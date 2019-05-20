@@ -3,10 +3,12 @@ package card.aggressive;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
 import effect.Effect;
+import effect.GetRandomCard;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class TakeOver extends ActiveCard implements AggressiveCard {
@@ -17,7 +19,8 @@ public class TakeOver extends ActiveCard implements AggressiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Effect[] effects = {new GetRandomCard(current, players.get(current))};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override

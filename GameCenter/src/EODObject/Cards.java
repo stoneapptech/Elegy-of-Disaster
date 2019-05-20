@@ -3,10 +3,7 @@ package EODObject;
 import card.Card;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -28,12 +25,18 @@ public class Cards implements Iterable<Card> {
             add(c);
         }
     }
+    public void add(int index, Card c) {
+        cardArray.add(index, c);
+    }
+
     public Card get(int index) {
         return cardArray.get(index);
     }
+
     public int size() {
         return cardArray.size();
     }
+
     public Cards filter(Predicate<? super Card> predicate) {
         ArrayList<Card> passedCards = new ArrayList<>();
         for(Card c: cardArray) {
@@ -43,15 +46,29 @@ public class Cards implements Iterable<Card> {
         }
         return new Cards(passedCards);
     }
+
     public boolean remove(Card card) {
         return cardArray.remove(card);
     }
     public Card remove(int index) {
         return cardArray.remove(index);
     }
+    public boolean removeIf(Predicate<? super Card> predicate) {
+        return cardArray.removeIf(predicate);
+    }
     public Card removeRandomly() {
         int index = new Random().nextInt(cardArray.size());
         return cardArray.remove(index);
+    }
+    public void clear() {
+        cardArray.clear();
+    }
+
+    public boolean isEmpty() {
+        return cardArray.isEmpty();
+    }
+    public boolean isNotEmpty() {
+        return !cardArray.isEmpty();
     }
 
 
