@@ -1,5 +1,6 @@
 package card.active;
 
+import card.SpecialCard;
 import card.active.ActiveCard;
 import effect.Effect;
 import gameCenter.GameCenter;
@@ -8,7 +9,7 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Bless extends ActiveCard {
+public class Bless extends ActiveCard implements SpecialCard {
     @Override
     public String getName() {
         return "加護";
