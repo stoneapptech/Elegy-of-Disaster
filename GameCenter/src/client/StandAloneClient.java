@@ -118,4 +118,9 @@ public class StandAloneClient extends Client {
         super.onNextTurn();
         outputMethod.send(character.getName() + ":\n" + character.getName() + "的第" + turn + "回合");
     }
+
+    @Override
+    public void onLoseCard(Card c) {
+        outputMethod.send(character.getName() +":\n" + character.getName() + "損失了" + c.getName());
+    }
 }

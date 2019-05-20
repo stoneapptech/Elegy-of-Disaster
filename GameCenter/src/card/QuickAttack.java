@@ -8,7 +8,7 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class QuickAttack extends ActiveCard {
+public class QuickAttack extends ActiveCard implements AggressiveCard {
     @Override
     public String getName() {
         return "奇襲";
@@ -16,7 +16,9 @@ public class QuickAttack extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Pipe opponent = players.get(current);
+        Effect[] effects = {new DamageLife(1, opponent), new LoseCard(opponent)};
+        return new ArrayList(Arrays.asList(effects));
     }
 
     @Override
