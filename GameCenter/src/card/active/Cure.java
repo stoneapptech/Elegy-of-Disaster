@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import character.Character;

@@ -1,18 +1,17 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
 import gameCenter.GameCenter;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import pipe.Pipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Strategy extends ActiveCard {
+public class Ease extends ActiveCard {
     @Override
     public String getName() {
-        return "妙策";
+        return "從容";
     }
 
     @Override
@@ -27,6 +26,6 @@ public class Strategy extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 7;
+        return 13;
     }
 }

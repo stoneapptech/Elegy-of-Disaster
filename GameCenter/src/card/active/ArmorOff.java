@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Ease extends ActiveCard {
+public class ArmorOff extends ActiveCard {
     @Override
     public String getName() {
-        return "從容";
+        return "卸甲";
     }
 
     @Override
@@ -21,11 +21,11 @@ public class Ease extends ActiveCard {
 
     @Override
     public int getCost() {
-        return 1;
+        return 2;
     }
 
     @Override
     protected int getId() {
-        return 13;
+        return 18;
     }
 }

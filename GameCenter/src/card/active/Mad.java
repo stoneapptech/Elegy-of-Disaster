@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class QuickAttack extends ActiveCard {
+public class Mad extends ActiveCard {
     @Override
     public String getName() {
-        return "奇襲";
+        return "狂亂";
     }
 
     @Override
@@ -26,6 +26,6 @@ public class QuickAttack extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 5;
+        return 22;
     }
 }

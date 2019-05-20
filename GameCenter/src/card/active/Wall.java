@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,11 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class WrapSpeed extends ActiveCard {
+public class Wall extends ActiveCard {
+
     @Override
     public String getName() {
-        return "神速";
+        return "掩體";
     }
 
     @Override
@@ -26,6 +27,6 @@ public class WrapSpeed extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 8;
+        return 16;
     }
 }

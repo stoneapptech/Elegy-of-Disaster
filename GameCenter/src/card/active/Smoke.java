@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Poison extends ActiveCard {
+public class Smoke extends ActiveCard {
     @Override
     public String getName() {
-        return "劇毒";
+        return "煙霧";
     }
 
     @Override
@@ -26,6 +26,6 @@ public class Poison extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 21;
+        return 17;
     }
 }

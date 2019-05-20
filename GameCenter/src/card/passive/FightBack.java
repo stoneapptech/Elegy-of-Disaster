@@ -1,4 +1,4 @@
-package card;
+package card.passive;
 
 import card.passive.PassiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Counter extends PassiveCard {
+public class FightBack extends PassiveCard {
     @Override
     public String getName() {
-        return "反制";
+        return "還擊";
     }
 
     @Override
@@ -21,6 +21,6 @@ public class Counter extends PassiveCard {
 
     @Override
     protected int getId() {
-        return 23;
+        return 11;
     }
 }

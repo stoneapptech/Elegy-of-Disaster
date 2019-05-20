@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SpreadAttack extends ActiveCard {
+public class Team extends ActiveCard {
     @Override
     public String getName() {
-        return "掃射";
+        return "合作";
     }
 
     @Override
@@ -26,6 +26,6 @@ public class SpreadAttack extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 19;
+        return 24;
     }
 }

@@ -1,6 +1,7 @@
-package card;
+package card.aggressive;
 
 import card.active.ActiveCard;
+import card.aggressive.AggressiveCard;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
@@ -8,10 +9,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Team extends ActiveCard {
+public class Kill extends ActiveCard implements AggressiveCard {
     @Override
     public String getName() {
-        return "合作";
+        return "殺意";
     }
 
     @Override
@@ -26,6 +27,6 @@ public class Team extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 24;
+        return 10;
     }
 }

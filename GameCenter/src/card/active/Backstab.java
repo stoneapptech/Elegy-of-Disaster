@@ -1,4 +1,4 @@
-package card;
+package card.active;
 
 import card.active.ActiveCard;
 import effect.Effect;
@@ -8,10 +8,10 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Bless extends ActiveCard {
+public class Backstab extends ActiveCard {
     @Override
     public String getName() {
-        return "加護";
+        return "背刺";
     }
 
     @Override
@@ -21,11 +21,11 @@ public class Bless extends ActiveCard {
 
     @Override
     public int getCost() {
-        return 1;
+        return 2;
     }
 
     @Override
     protected int getId() {
-        return 20;
+        return 25;
     }
 }

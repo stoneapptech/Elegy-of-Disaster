@@ -32,22 +32,38 @@ public abstract class Character {
         life -= num;
     }
 
+    //lazy init
     private Cards deck = null;
     public Cards getDeck() {
         if(deck == null) {
             ArrayList<Card> initialDeck = new ArrayList<Card>() {{
                 String[] cards = {"aggressive.Attack",
-                        "Cure",
+                        "active.Cure",
                         "active.Supply",
-                        "TakeOver",
-                        "QuickAttack",
+                        "aggressive.TakeOver",
+                        "aggressive.QuickAttack",
                         "passive.Dodge",
-                        "Strategy",
-                        "SpreadAttack",
-                        "Bless",
-                        "Poison",
-                        "Mad",
-                        "Counter"};
+                        "active.Strategy",
+                        "active.WrapSpeed",
+                        "active.Hidden",
+                        "aggressive.Kill",
+                        "passive.FightBack",
+                        "active.Tapping",
+                        "active.Ease",
+                        "aggressive.Snipe",
+                        "active.Grenade",
+                        "active.Wall",
+                        "active.Smoke",
+                        "active.ArmorOff",
+                        "aggressive.SpreadAttack",
+                        "active.Bless",
+                        "active.Poison",
+                        "active.Mad",
+                        "passive.Counter",
+                        "active.Team",
+                        "active.Backstab",
+                        "aggressive.DoubleAttack",
+                        "active.Seperation"};
                 for (int i = 0; i < getDeckCardsCount().length; i++) {
                     for (int j = 0; j < getDeckCardsCount()[i]; j++) {
                         try {
