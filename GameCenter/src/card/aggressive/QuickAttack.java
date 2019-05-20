@@ -17,7 +17,9 @@ public class QuickAttack extends ActiveCard implements AggressiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Pipe opponent = players.get(current);
+        Effect[] effects = {new DamageLife(1, opponent), new LoseCard(opponent)};
+        return new ArrayList(Arrays.asList(effects));
     }
 
     @Override

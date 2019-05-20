@@ -144,6 +144,11 @@ public abstract class GameCenter {
         return players.getOrDefault(current, pipes.get(0));
     }
 
+    public void loseCardOn(Pipe pipe) {
+        Cards cards = hands.get(pipe);
+        Card lost = cards.removeRandomly();
+        pipe.onLoseCard(lost);
+    }
     //These are not destructive
     //Please remove the cards from deck and add cards to hand manually
     private Card drawCard(Cards fromCards) {

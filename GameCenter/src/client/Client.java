@@ -37,6 +37,7 @@ public abstract class Client {
     public abstract void onAskedDefend(Cards handDefensive);
     public abstract void onChooseCard(Cards hand) throws ChooseZeroException;
     public abstract void onReceivedCard(Card card);
+    public abstract void onLoseCard(Card card);
     public void onNextTurn() {
         turn++;
         cost = turn>2 ? 3:turn;

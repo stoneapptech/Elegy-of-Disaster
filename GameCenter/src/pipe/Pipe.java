@@ -71,6 +71,9 @@ public class Pipe {
             }
         }
     }
+    public void onLoseCard(Card c) {
+        client.onLoseCard(c);
+    }
 
     //method for Client
     //which means it interact with GameCenter
@@ -110,6 +113,9 @@ public class Pipe {
     }
     public void appendCardToBuffer(Card c) {
         cardBuffer.add(c);
+    }
+    public void loseRandomCard() {
+        center.loseCardOn(this);
     }
 
     @Override

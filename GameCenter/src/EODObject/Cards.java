@@ -49,6 +49,10 @@ public class Cards implements Iterable<Card> {
     public Card remove(int index) {
         return cardArray.remove(index);
     }
+    public Card removeRandomly() {
+        int index = new Random().nextInt(cardArray.size());
+        return cardArray.remove(index);
+    }
 
 
     //support foreach
