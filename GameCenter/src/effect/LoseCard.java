@@ -1,5 +1,7 @@
 package effect;
 
+import pipe.Pipe;
+
 public class LoseCard extends Effect {
 
     private Pipe opponent;

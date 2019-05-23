@@ -2,11 +2,14 @@ package card.aggressive;
 
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
+import effect.DamageLife;
 import effect.Effect;
+import effect.LoseCard;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class QuickAttack extends ActiveCard implements AggressiveCard {

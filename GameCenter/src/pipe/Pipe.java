@@ -20,7 +20,7 @@ public class Pipe {
 
     private GameCenter center;
     public Client client;
-    private ArrayList<Card> cardBuffer = new ArrayList<>();
+    private Cards cardBuffer = new Cards();
 
     public Pipe(GameCenter center, Client client) {
         this.center = center;
@@ -70,6 +70,7 @@ public class Pipe {
                 ((PassiveCard) c).applyPassiveSkill(current);
             }
         }
+        cardBuffer.clear();
     }
     public void onLoseCard(Card c) {
         client.onLoseCard(c);
@@ -114,8 +115,8 @@ public class Pipe {
     public void appendCardToBuffer(Card c) {
         cardBuffer.add(c);
     }
-    public void loseRandomCard() {
-        center.loseCardOn(this);
+    public Card loseRandomCard() {
+        return center.loseCardOn(this);
     }
 
     @Override

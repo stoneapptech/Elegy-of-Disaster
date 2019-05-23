@@ -1,5 +1,6 @@
 package card.aggressive;
 
+import card.SpecialCard;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
 import effect.Effect;
@@ -9,7 +10,7 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Kill extends ActiveCard implements AggressiveCard {
+public class Kill extends ActiveCard implements AggressiveCard, SpecialCard {
     @Override
     public String getName() {
         return "殺意";

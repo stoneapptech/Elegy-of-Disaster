@@ -1,14 +1,12 @@
 package card.passive;
 
-import card.passive.PassiveCard;
+import card.SpecialCard;
 import effect.Effect;
-import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Counter extends PassiveCard {
+public class Counter extends PassiveCard implements SpecialCard {
     @Override
     public String getName() {
         return "反制";
