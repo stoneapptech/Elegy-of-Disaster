@@ -4,6 +4,7 @@ import EODObject.Cards;
 import card.Card;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
+import card.aggressive.Snipe;
 import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
@@ -11,6 +12,8 @@ import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
 
 import java.util.HashMap;
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class Pipe {
 
@@ -64,7 +67,7 @@ public class Pipe {
                 ((ActiveCard) c).applyEffects(current, players, center);
             }
             if(c instanceof PassiveCard) {
-                ((PassiveCard) c).applyPassiveSkill(current);
+                ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
         boolean successfullyAttacked = false;
@@ -108,7 +111,12 @@ public class Pipe {
     }
 
     public void invalidateAggressive() {
-        cardBuffer.removeIf(card -> card instanceof AggressiveCard);
+        cardBuffer.removeIf(card -> {
+            if(card instanceof AggressiveCard) {
+                return !(card instanceof Snipe) || new Random().nextBoolean();
+            }
+            return false;
+        });
     }
 
     public void drawCard(int num) {
@@ -123,6 +131,12 @@ public class Pipe {
     }
     public Card loseRandomCard() {
         return center.loseCardOn(this);
+    }
+    public Card getCardFromBuffer(int index) {
+        if (index < 0) {
+            index = cardBuffer.size() + index;
+        }
+        return cardBuffer.get(index);
     }
 
     @Override
