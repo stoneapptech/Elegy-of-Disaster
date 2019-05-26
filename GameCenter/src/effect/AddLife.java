@@ -1,8 +1,5 @@
 package effect;
 
-import character.Character;
-import client.Client;
-import gameCenter.GameCenter;
 import pipe.Pipe;
 
 public class AddLife extends Effect {
@@ -14,6 +11,11 @@ public class AddLife extends Effect {
     public AddLife(int life, Pipe pipe) {
         subject = pipe;
         this.life = life;
+    }
+
+    @Override
+    public String getDescription() {
+        return "回復自己" + life + "點生命值";
     }
 
     @Override

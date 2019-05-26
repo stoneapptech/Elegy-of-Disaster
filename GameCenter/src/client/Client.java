@@ -9,6 +9,7 @@ import io.Output;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Client {
 
@@ -41,6 +42,10 @@ public abstract class Client {
     public void onNextTurn() {
         turn++;
         cost = turn>2 ? 3:turn;
+    }
+
+    public void onAttackSuccessfully(Pipe owner, HashMap<Pipe, Pipe> players) {
+        character.onAttackSuccessfully(outputMethod, inputMethod, owner, players);
     }
 
     public int getAvailableCost() {

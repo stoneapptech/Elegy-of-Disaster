@@ -2,11 +2,13 @@ package character;
 
 import EODObject.Cards;
 import card.Card;
+import io.Input;
+import io.Output;
+import pipe.Pipe;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 
 public abstract class Character {
 
@@ -31,6 +33,15 @@ public abstract class Character {
     public void decreaseLifeBy(int num) {
         life -= num;
     }
+
+    public void onDefendSuccessfully(Output outputMethod, Input inputMethod,
+                                     Pipe owner, HashMap<Pipe, Pipe> players) {}
+    public void onAttackSuccessfully(Output outputMethod, Input inputMethod,
+                                     Pipe owner, HashMap<Pipe, Pipe> players) {}
+    public void onDefendFailed(Output outputMethod, Input inputMethod,
+                               Pipe owner, HashMap<Pipe, Pipe> players) {}
+    public void onAttackFailed(Output outputMethod, Input inputMethod,
+                               Pipe owner, HashMap<Pipe, Pipe> players) {}
 
     //lazy init
     private Cards deck = null;

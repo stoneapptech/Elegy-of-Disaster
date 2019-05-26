@@ -7,14 +7,10 @@ import card.aggressive.AggressiveCard;
 import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
-import effect.Effect;
 import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Predicate;
 
 public class Pipe {
 
@@ -61,7 +57,8 @@ public class Pipe {
     public void askDefend(Cards cards) {
         client.onAskedDefend(cards);
     }
-    public void activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+    //return whether successfully attacked
+    public boolean activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         for(Card c: cardBuffer) {
             if(c instanceof ActiveCard) {
                 ((ActiveCard) c).applyEffects(current, players, center);
@@ -70,10 +67,19 @@ public class Pipe {
                 ((PassiveCard) c).applyPassiveSkill(current);
             }
         }
+        boolean successfullyAttacked = false;
+        if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
+            successfullyAttacked = true;
+        }
         cardBuffer.clear();
+        return successfullyAttacked;
     }
     public void onLoseCard(Card c) {
         client.onLoseCard(c);
+    }
+
+    public void onAttackSuccessfully(HashMap<Pipe, Pipe> players) {
+        client.onAttackSuccessfully(this, players);
     }
 
     //method for Client

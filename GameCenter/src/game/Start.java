@@ -27,7 +27,6 @@ public class Start {
             "銀",
             "W",
             "正作",
-            "卡夫卡"
     };
     private static Constructor[] characterConstructors;
 
@@ -44,7 +43,6 @@ public class Start {
                     AtmosphereMaster.class.getConstructor(),
                     Mousetrap.class.getConstructor(),
                     DoubleReturn.class.getConstructor(),
-                    PuppetHouse.class.getConstructor()
             };
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
