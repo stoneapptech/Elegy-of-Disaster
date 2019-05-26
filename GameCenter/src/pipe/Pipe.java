@@ -69,7 +69,7 @@ public class Pipe {
                 ((ActiveCard) c).applyEffects(current, players, center);
             }
             if(c instanceof PassiveCard) {
-                ((PassiveCard) c).applyPassiveSkill(current);
+                ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
         cardBuffer.clear();
@@ -104,7 +104,12 @@ public class Pipe {
     }
 
     public void invalidateAggressive() {
-        cardBuffer.removeIf(card -> card instanceof AggressiveCard && (!(card instanceof Snipe) || new Random().nextBoolean()));
+        cardBuffer.removeIf(card -> {
+            if(card instanceof AggressiveCard) {
+                return !(card instanceof Snipe) || new Random().nextBoolean();
+            }
+            return false;
+        });
     }
 
     public void drawCard(int num) {
@@ -119,6 +124,12 @@ public class Pipe {
     }
     public Card loseRandomCard() {
         return center.loseCardOn(this);
+    }
+    public Card getCardFromBuffer(int index) {
+        if (index < 0) {
+            index = cardBuffer.size() + index;
+        }
+        return cardBuffer.get(index);
     }
 
     @Override
