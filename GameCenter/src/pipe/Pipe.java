@@ -4,6 +4,7 @@ import EODObject.Cards;
 import card.Card;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
+import card.aggressive.Snipe;
 import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.function.Predicate;
 
 public class Pipe {
@@ -102,7 +104,7 @@ public class Pipe {
     }
 
     public void invalidateAggressive() {
-        cardBuffer.removeIf(card -> card instanceof AggressiveCard);
+        cardBuffer.removeIf(card -> card instanceof AggressiveCard && (!(card instanceof Snipe) || new Random().nextBoolean()));
     }
 
     public void drawCard(int num) {
