@@ -22,7 +22,7 @@ public class Dodge extends PassiveCard {
     }
 
     @Override
-    protected ArrayList<Effect> getEffects(Pipe current) {
+    protected ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         Effect[] effects = {new InvalidateAggressive(current)};
         return new ArrayList<>(Arrays.asList(effects));
     }

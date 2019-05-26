@@ -18,7 +18,7 @@ public class FightBack extends PassiveCard implements SpecialCard {
     }
 
     @Override
-    public ArrayList<Effect> getEffects(Pipe current) {
+    public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         Effect[] effects = {new DamageLife(4, current)};
         return new ArrayList<>(Arrays.asList(effects));
     }
