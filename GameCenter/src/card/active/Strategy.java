@@ -1,12 +1,12 @@
 package card.active;
 
-import card.active.ActiveCard;
 import effect.Effect;
+import effect.GetSpecial;
 import gameCenter.GameCenter;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Strategy extends ActiveCard {
@@ -17,7 +17,8 @@ public class Strategy extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Effect[] effects = {new GetSpecial(current)};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override

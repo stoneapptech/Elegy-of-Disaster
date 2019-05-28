@@ -8,7 +8,6 @@ import io.Input;
 import io.Output;
 import pipe.Pipe;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Client {
@@ -29,7 +28,7 @@ public abstract class Client {
         this.inputMethod = inputMethod;
     }
 
-    public abstract void onAskedAddToHand(ArrayList<Card> cards);
+    public abstract void onAskedAddToHand(Cards cards);
     public abstract void onDropCard(Card card);
     public abstract void fuckOff();
     public abstract void onPoisoned();

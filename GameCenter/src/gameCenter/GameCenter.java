@@ -167,4 +167,7 @@ public abstract class GameCenter {
         return cards;
     }
 
+    public void addToHand(Card c, Pipe pipe) {
+        hands.get(pipe).add(c);
+    }
 }
