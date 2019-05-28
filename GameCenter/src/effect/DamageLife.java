@@ -13,6 +13,11 @@ public class DamageLife extends Effect {
     }
 
     @Override
+    public String getDescription() {
+        return "給予敵方" + life + "點傷害";
+    }
+
+    @Override
     public void invoke() {
         subject.decreaseLife(life);
     }

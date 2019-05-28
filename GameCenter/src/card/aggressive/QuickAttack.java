@@ -1,7 +1,6 @@
 package card.aggressive;
 
 import card.active.ActiveCard;
-import card.aggressive.AggressiveCard;
 import effect.DamageLife;
 import effect.Effect;
 import effect.LoseCard;
@@ -21,7 +20,7 @@ public class QuickAttack extends ActiveCard implements AggressiveCard {
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         Pipe opponent = players.get(current);
-        Effect[] effects = {new DamageLife(1, opponent), new LoseCard(opponent)};
+        Effect[] effects = {new DamageLife(1, opponent), new LoseCard(1, opponent)};
         return new ArrayList<>(Arrays.asList(effects));
     }
 

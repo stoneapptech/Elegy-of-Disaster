@@ -1,22 +1,17 @@
 package gameCenter;
 
+import EODObject.Cards;
 import card.Card;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
-import card.passive.Dodge;
 import card.passive.PassiveCard;
 import client.Client;
 import exceptions.ChooseZeroException;
 import exceptions.NoOneLostException;
-
 import pipe.Pipe;
 import pipe.Pipes;
 
-import EODObject.Cards;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.IntStream;
 
 public abstract class GameCenter {
 
@@ -114,7 +109,10 @@ public abstract class GameCenter {
                 opponent.askDefend(passive);
             }
         }
-        current.activateBuffer(current, players, this);
+        boolean successAttacked = current.activateBuffer(current, players, this);
+        if(successAttacked) {
+            current.onAttackSuccessfully(players);
+        }
         hands.get(current).remove(number-1);
     }
 
@@ -124,6 +122,8 @@ public abstract class GameCenter {
         Card chosen = passive.get(number-1);
         current.insertCardToBufferHead(chosen);
         hands.get(opponent).remove(chosen);
+//        opponent.getCharacter().onDefendSuccessfully();
+
     }
     
     public void onAskedToDrawCard(int number) {
@@ -167,4 +167,7 @@ public abstract class GameCenter {
         return cards;
     }
 
+    public void addToHand(Card c, Pipe pipe) {
+        hands.get(pipe).add(c);
+    }
 }

@@ -9,8 +9,6 @@ import exceptions.ChooseZeroException;
 import io.Input;
 import io.Output;
 
-import java.util.ArrayList;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class StandAloneClient extends Client {
@@ -20,7 +18,7 @@ public class StandAloneClient extends Client {
     }
 
     @Override
-    public void onAskedAddToHand(ArrayList<Card> cards) {
+    public void onAskedAddToHand(Cards cards) {
         outputMethod.send("請從以下選取一張加入手牌");
         for (int i = 0; i < cards.size(); i++) {
             outputMethod.send((i + 1) + "." + cards.get(i).getName());
@@ -28,7 +26,7 @@ public class StandAloneClient extends Client {
         while(true) {
             int num = inputMethod.getNumber();
             if(num > 0 && num <= cards.size()) {
-                pipe.addCardToHand(num);
+                pipe.addCardToHand(num, cards);
                 break;
             }
         }

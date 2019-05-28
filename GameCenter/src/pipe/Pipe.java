@@ -2,20 +2,18 @@ package pipe;
 
 import EODObject.Cards;
 import card.Card;
+import card.SpecialCard;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
 import card.aggressive.Snipe;
 import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
-import effect.Effect;
 import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.function.Predicate;
 
 public class Pipe {
 
@@ -62,7 +60,8 @@ public class Pipe {
     public void askDefend(Cards cards) {
         client.onAskedDefend(cards);
     }
-    public void activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+    //return whether successfully attacked
+    public boolean activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         for(Card c: cardBuffer) {
             if(c instanceof ActiveCard) {
                 ((ActiveCard) c).applyEffects(current, players, center);
@@ -71,10 +70,19 @@ public class Pipe {
                 ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
+        boolean successfullyAttacked = false;
+        if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
+            successfullyAttacked = true;
+        }
         cardBuffer.clear();
+        return successfullyAttacked;
     }
     public void onLoseCard(Card c) {
         client.onLoseCard(c);
+    }
+
+    public void onAttackSuccessfully(HashMap<Pipe, Pipe> players) {
+        client.onAttackSuccessfully(this, players);
     }
 
     //method for Client
@@ -86,7 +94,9 @@ public class Pipe {
     public void playDefensiveCard(int number) {
         center.onClientPlayDefensive(number);
     }
-    public void addCardToHand(int number) {
+    public void addCardToHand(int number, Cards cards) {
+        Card c = cards.get(number-1);
+        center.addToHand(c, this);
     }
 
     //method for Effect and Card
@@ -134,5 +144,16 @@ public class Pipe {
     @Override
     public String toString() {
         return "Pipe: " + client.getCharacter().getName();
+    }
+
+    public void getSpecialFromDeck() {
+        Cards specialCards = getCharacter().getDeck().filter(card -> {
+            return card instanceof SpecialCard;
+        });
+        Cards firstThree = new Cards();
+        for(int i = 0; i < 3; i++) {
+            firstThree.add(specialCards.get(i));
+        }
+        client.onAskedAddToHand(firstThree);
     }
 }

@@ -1,7 +1,5 @@
 package effect;
 
-import EODObject.Cards;
-import card.Card;
 import pipe.Pipe;
 
 
@@ -11,6 +9,11 @@ public class DrawCard extends Effect {
     public DrawCard(int num, Pipe subject) {
         this.subject = subject;
         this.num = num;
+    }
+
+    @Override
+    public String getDescription() {
+        return "抽取" + num + "張卡片";
     }
 
     @Override

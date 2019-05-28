@@ -1,9 +1,5 @@
 package character;
 
-import card.Card;
-
-import java.util.ArrayList;
-
 public class Transcender extends Character {
 
     public Transcender() {
@@ -17,6 +13,6 @@ public class Transcender extends Character {
 
     @Override
     int[] getDeckCardsCount() {
-        return new int[]{10, 2, 3, 3, 5, 9, 4, 2, 0, 0, 0, 3, 0};
+        return new int[]{10, 2, 3, 3, 5, 900, 4, 2, 0, 0, 0, 3, 0};
     }
 }
