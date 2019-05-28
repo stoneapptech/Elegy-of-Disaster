@@ -16,6 +16,7 @@ public class WrapSpeed extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+
         return null;
     }
 
