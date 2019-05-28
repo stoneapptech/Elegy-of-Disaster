@@ -1,7 +1,7 @@
 package EODObject;
 
 import card.Card;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -73,7 +73,6 @@ public class Cards implements Iterable<Card> {
 
 
     //support foreach
-    @NotNull
     @Override
     public Iterator<Card> iterator() {
         return cardArray.iterator();
