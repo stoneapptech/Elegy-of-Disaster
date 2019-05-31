@@ -12,6 +12,7 @@ import pipe.Pipe;
 import pipe.Pipes;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 
 public abstract class GameCenter {
 
@@ -31,6 +32,10 @@ public abstract class GameCenter {
     //use this map to record the order of players
     //the value is the next player after the key
     private HashMap<Pipe, Pipe> players = new HashMap<>();
+
+    private HashMap<Pipe, Boolean> canDefense = new HashMap<>();
+
+    private HashMap<Pipe, Boolean> canAttack = new HashMap<>();
 
     public void begin(Client... clients) {
         setup(clients);
@@ -61,8 +66,24 @@ public abstract class GameCenter {
         for(int i = 0; i < getPipesCount(); i++) {
             players.put(pipes.get(i), pipes.get( (i+1)%getPipesCount() ));
         }
+        for(Pipe p:pipes) {
+            canDefense.put(p, true);
+        }
+        for(Pipe p:pipes) {
+            canAttack.put(p, true);
+        }
     }
 
+    public boolean changeDefensible(Pipe pipe, boolean status) {
+        canDefense.put(pipe, status);
+        return status;
+    }
+    
+    public boolean changeAttackable(Pipe pipe, boolean status) {
+        canAttack.put(pipe, status);
+        return status;
+    }
+    
     private Pipe current = null;
     private void loop() {
         while(true) {
@@ -85,6 +106,9 @@ public abstract class GameCenter {
 
             current.displayLife();
             current.send("請出牌:(或輸入0放棄)");
+            if (canDefense.get(current) != true){
+                canDefense.put(current, true);
+            }
             while(current.getAvailableCost() != 0) {
                 current.send("剩餘cost:" + current.getAvailableCost());
                 try {
@@ -92,6 +116,9 @@ public abstract class GameCenter {
                 } catch (ChooseZeroException e) {
                     //user choose zero
                     break;
+                }
+                if (canAttack.get(current) != true){
+                    canAttack.put(current, true);
                 }
             }
         }
@@ -105,7 +132,7 @@ public abstract class GameCenter {
         if(card instanceof AggressiveCard) {
             Pipe opponent = players.get(current);
             Cards passive = hands.get(opponent).filter(c -> c instanceof PassiveCard);
-            if(passive.isNotEmpty()) {
+            if(passive.isNotEmpty() && canDefense.get(opponent)) {
                 opponent.askDefend(passive);
             }
         }
@@ -169,5 +196,9 @@ public abstract class GameCenter {
 
     public void addToHand(Card c, Pipe pipe) {
         hands.get(pipe).add(c);
+    }
+
+    public boolean getCanAttack(Pipe pipe) {
+        return canAttack.get(pipe);
     }
 }

@@ -121,6 +121,10 @@ public class Pipe {
         });
     }
 
+    public boolean changeDefensible(boolean status) {
+        return center.changeDefensible(this, status);
+    }
+
     public void drawCard(int num) {
         center.onAskedToDrawCard(num);
     }
@@ -155,5 +159,13 @@ public class Pipe {
             firstThree.add(specialCards.get(i));
         }
         client.onAskedAddToHand(firstThree);
+    }
+
+    public boolean changeAttackable(boolean status) {
+        return center.changeAttackable(this, status);
+    }
+
+    public boolean askCanAttack() {
+        return center.getCanAttack(this);
     }
 }

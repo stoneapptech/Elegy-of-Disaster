@@ -1,11 +1,13 @@
 package card.active;
 
 import card.active.ActiveCard;
+import effect.ChangeDefensible;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class WrapSpeed extends ActiveCard {
@@ -17,7 +19,9 @@ public class WrapSpeed extends ActiveCard {
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
 
-        return null;
+        Effect[] effects = {new ChangeDefensible(current, false)};
+        current.send(current.getCharacter().getName() + "拔出雙刀，變的很快");
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override
