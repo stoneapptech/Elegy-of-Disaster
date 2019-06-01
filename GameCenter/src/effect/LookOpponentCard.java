@@ -6,7 +6,7 @@ public class LookOpponentCard extends Effect{
 
     private Pipe opponent;
 
-    public LookOpponentCard(Pipe opponent){this.opponent = opponent}
+    public LookOpponentCard(Pipe opponent){this.opponent = opponent;}
 
     @Override
 

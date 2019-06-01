@@ -144,6 +144,9 @@ public class Pipe {
         }
         return cardBuffer.get(index);
     }
+    public void addCardToHand(Card c) {
+        center.addToHand(c, this);
+    }
 
     @Override
     public String toString() {
@@ -173,8 +176,8 @@ public class Pipe {
     public void consumeCost(int cost) {
         client.consumeCost(cost);
     }
+    public void showCard(int a) {
+
+    }
 }
 
-     public void showCard(int) {
-
-     }
