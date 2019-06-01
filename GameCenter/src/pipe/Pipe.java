@@ -74,6 +74,9 @@ public class Pipe {
                 ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
+
+
+
         boolean successfullyAttacked = false;
         if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
             successfullyAttacked = true;
