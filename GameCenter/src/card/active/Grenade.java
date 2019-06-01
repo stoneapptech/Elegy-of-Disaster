@@ -1,12 +1,13 @@
 package card.active;
 
 import card.SpecialCard;
-import card.active.ActiveCard;
+import effect.AddCardToHand;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Grenade extends ActiveCard implements SpecialCard {
@@ -17,7 +18,8 @@ public class Grenade extends ActiveCard implements SpecialCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Effect[] effects = {new AddCardToHand(this, players.get(current))};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override
