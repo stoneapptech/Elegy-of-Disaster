@@ -1,11 +1,14 @@
 package card.active;
 
 import card.active.ActiveCard;
+import effect.ConsumeCost;
+import effect.DrawCard;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Ease extends ActiveCard {
@@ -16,7 +19,9 @@ public class Ease extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        int cost = current.getAvailableCost();
+        Effect[] effects = {new DrawCard(cost+1, current), new ConsumeCost(cost, current)};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override

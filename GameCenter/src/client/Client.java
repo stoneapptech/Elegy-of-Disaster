@@ -59,4 +59,8 @@ public abstract class Client {
     public int getCharacterLife() {
         return character.getLife();
     }
+
+    public void consumeCost(int c) {
+        cost -= c;
+    }
 }

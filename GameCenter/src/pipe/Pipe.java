@@ -168,4 +168,8 @@ public class Pipe {
     public boolean askCanAttack() {
         return center.getCanAttack(this);
     }
+
+    public void consumeCost(int cost) {
+        client.consumeCost(cost);
+    }
 }
