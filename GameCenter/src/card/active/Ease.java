@@ -1,7 +1,8 @@
 package card.active;
 
 import card.active.ActiveCard;
-import effect.ChangeAttackable;
+
+import effect.ConsumeCost;
 import effect.DrawCard;
 import effect.Effect;
 import gameCenter.GameCenter;
@@ -19,8 +20,11 @@ public class Ease extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        Effect[] effects = new Effect[]{new DrawCard(, current)};
-        return new ArrayList<>(Arrays.asList(effects));;
+
+        int cost = current.getAvailableCost();
+        Effect[] effects = {new DrawCard(cost+1, current), new ConsumeCost(cost, current)};
+        return new ArrayList<>(Arrays.asList(effects));
+
     }
 
     @Override

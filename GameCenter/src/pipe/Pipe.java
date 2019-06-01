@@ -169,7 +169,8 @@ public class Pipe {
         return center.getCanAttack(this);
     }
 
-    public void showCard() {
 
+    public void consumeCost(int cost) {
+        client.consumeCost(cost);
     }
 }
