@@ -9,7 +9,8 @@ public class LookOpponentCard extends Effect{
     public LookOpponentCard(Pipe opponent){this.opponent = opponent}
 
     @Override
+
     public void invoke() {
-        opponent.showCard();
+        return;
     }
 }

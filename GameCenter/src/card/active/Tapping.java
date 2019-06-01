@@ -18,8 +18,7 @@ public class Tapping extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        Effect[] effects = new Effect[]{new LookOpponentCard(3, current)};
-        return new ArrayList<>(Arrays.asList(effects));
+        return null;
     }
 
     @Override

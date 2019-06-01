@@ -174,3 +174,7 @@ public class Pipe {
         client.consumeCost(cost);
     }
 }
+
+     public void showCard(int) {
+
+     }
