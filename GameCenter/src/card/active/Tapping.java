@@ -1,11 +1,13 @@
 package card.active;
 
 import card.active.ActiveCard;
+import effect.LookOpponentCard;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Tapping extends ActiveCard {
@@ -16,7 +18,8 @@ public class Tapping extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Effect[] effects = new Effect[]{new LookOpponentCard(3, current)};
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override

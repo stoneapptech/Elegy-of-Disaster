@@ -165,7 +165,11 @@ public class Pipe {
         return center.changeAttackable(this, status);
     }
 
-    public boolean askCanAttack() {
+    public boolean getCanAttack() {
         return center.getCanAttack(this);
+    }
+
+    public void showCard() {
+
     }
 }

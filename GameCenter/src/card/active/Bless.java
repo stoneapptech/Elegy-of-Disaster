@@ -17,6 +17,7 @@ public class Bless extends ActiveCard implements SpecialCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+
         return null;
     }
 

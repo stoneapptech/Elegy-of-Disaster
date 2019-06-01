@@ -20,7 +20,7 @@ public class Hidden extends ActiveCard {
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         Pipe opponent = players.get(current);
         Effect[] effects = {new ChangeAttackable(opponent, false)};
-        current.send(current.getCharacter().getName() + "默默的蹲了下去");
+        center.broadcast(current.getCharacter().getName() + "默默的蹲了下去");
         return new ArrayList<>(Arrays.asList(effects));
 
     }

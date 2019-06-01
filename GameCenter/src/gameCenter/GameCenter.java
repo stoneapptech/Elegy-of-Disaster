@@ -106,10 +106,10 @@ public abstract class GameCenter {
 
             current.displayLife();
             current.send("請出牌:(或輸入0放棄)");
-            if (canDefense.get(current) != true){
+            if (!canDefense.get(current)){
                 canDefense.put(current, true);
             }
-            while(current.getAvailableCost() != 0) {
+            while(current.getAvailableCost() > 0) {
                 current.send("剩餘cost:" + current.getAvailableCost());
                 try {
                     current.requirePlayCard(hands.get(current));
@@ -117,7 +117,7 @@ public abstract class GameCenter {
                     //user choose zero
                     break;
                 }
-                if (canAttack.get(current) != true){
+                if (!canAttack.get(current)){
                     canAttack.put(current, true);
                 }
             }
@@ -169,6 +169,9 @@ public abstract class GameCenter {
                 p.send(healed.client.getCharacter().getName() + "回復了" + life + "點生命值");
             }
         }
+    }
+    public void broadcast(String message) {
+        pipes.broadcast(message);
     }
     private Pipe nextPlayer(Pipe current) {
         return players.getOrDefault(current, pipes.get(0));

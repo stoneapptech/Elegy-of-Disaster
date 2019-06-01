@@ -1,11 +1,14 @@
 package card.active;
 
 import card.active.ActiveCard;
+import effect.ChangeAttackable;
+import effect.DrawCard;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Ease extends ActiveCard {
@@ -16,7 +19,8 @@ public class Ease extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Effect[] effects = new Effect[]{new DrawCard(, current)};
+        return new ArrayList<>(Arrays.asList(effects));;
     }
 
     @Override

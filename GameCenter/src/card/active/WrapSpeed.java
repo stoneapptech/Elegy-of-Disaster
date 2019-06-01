@@ -20,7 +20,7 @@ public class WrapSpeed extends ActiveCard {
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
 
         Effect[] effects = {new ChangeDefensible(current, false)};
-        current.send(current.getCharacter().getName() + "拔出雙刀，變的很快");
+        center.broadcast(current.getCharacter().getName() + "拔出雙刀，變的很快");
         return new ArrayList<>(Arrays.asList(effects));
     }
 

@@ -80,7 +80,7 @@ public class StandAloneClient extends Client {
         Predicate<Card> predicate = new Predicate<Card>() {
             @Override
             public boolean test(Card card) {
-                boolean canAttack = pipe.askCanAttack();
+                boolean canAttack = pipe.getCanAttack();
                 if(card instanceof AggressiveCard) {
                     return canAttack;
                 }
