@@ -11,7 +11,8 @@ public class ConsumeCost extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         current.consumeCost(cost);
+        return true;
     }
 }

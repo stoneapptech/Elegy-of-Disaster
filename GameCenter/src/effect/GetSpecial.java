@@ -11,7 +11,8 @@ public class GetSpecial extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         owner.getSpecialFromDeck();
+        return true;
     }
 }

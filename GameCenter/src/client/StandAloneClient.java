@@ -50,8 +50,8 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onDamaged(int damage) {
-        character.decreaseLifeBy(damage);
-        outputMethod.send(character.getName() + ":\n" + character.getName() + "受到" + damage +"點傷害");
+        int num = character.decreaseLifeBy(damage);
+        outputMethod.send(character.getName() + ":\n" + character.getName() + "受到" + num +"點傷害");
     }
 
     @Override
@@ -131,5 +131,11 @@ public class StandAloneClient extends Client {
     @Override
     public void onLoseCard(Card c) {
         outputMethod.send(character.getName() +":\n" + character.getName() + "損失了" + c.getName());
+    }
+
+    @Override
+    public void poisonDamage() {
+        super.poisonDamage();
+        outputMethod.send(character.getName() +":\n" + character.getName() + "因劇毒損失了" + character.getPoisoned() + "點生命");
     }
 }

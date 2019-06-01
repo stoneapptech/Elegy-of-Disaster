@@ -13,7 +13,8 @@ public class LoseCard extends Effect {
 
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         opponent.loseRandomCard();
+        return true;
     }
 }

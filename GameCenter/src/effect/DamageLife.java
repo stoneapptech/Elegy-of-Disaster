@@ -18,7 +18,8 @@ public class DamageLife extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         subject.decreaseLife(life);
+        return true;
     }
 }

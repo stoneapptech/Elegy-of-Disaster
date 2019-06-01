@@ -6,11 +6,11 @@ public class LookOpponentCard extends Effect{
 
     private Pipe opponent;
 
-    public LookOpponentCard(Pipe opponent){this.opponent = opponent}
+    public LookOpponentCard(Pipe opponent){this.opponent = opponent;}
 
     @Override
 
-    public void invoke() {
-        return;
+    public boolean invoke() {
+        return true;
     }
 }
