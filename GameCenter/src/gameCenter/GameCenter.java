@@ -3,6 +3,7 @@ package gameCenter;
 import EODObject.Cards;
 import card.Card;
 import card.active.ActiveCard;
+import card.active.Grenade;
 import card.aggressive.AggressiveCard;
 import card.passive.PassiveCard;
 import client.Client;
@@ -120,6 +121,11 @@ public abstract class GameCenter {
                     canAttack.put(current, true);
                 }
             }
+            //turn ends
+            Cards currentHand = hands.get(current);
+            int grenadeCount = currentHand.contains(Grenade.class);
+            current.decreaseLife(4 * grenadeCount);
+            currentHand.removeAll(Grenade.class);
         }
     }
 

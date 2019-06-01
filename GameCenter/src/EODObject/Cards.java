@@ -55,6 +55,11 @@ public class Cards implements Iterable<Card> {
     public Card remove(int index) {
         return cardArray.remove(index);
     }
+    public boolean removeAll(Class<? extends Card> cls) {
+        return cardArray.removeIf(card ->
+                card.getClass().getName().equals(cls.getName())
+        );
+    }
     public boolean removeIf(Predicate<? super Card> predicate) {
         return cardArray.removeIf(predicate);
     }
@@ -71,6 +76,15 @@ public class Cards implements Iterable<Card> {
     }
     public boolean isNotEmpty() {
         return !cardArray.isEmpty();
+    }
+    public boolean contains(Card c) {
+        return cardArray.contains(c);
+    }
+    public int contains(Class<? extends Card> cls) {
+        Cards cards = filter(card ->
+                card.getClass().getName().equals(cls.getName())
+        );
+        return cards.size();
     }
 
 
