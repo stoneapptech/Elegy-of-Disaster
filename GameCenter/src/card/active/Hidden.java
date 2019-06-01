@@ -1,11 +1,13 @@
 package card.active;
 
 import card.active.ActiveCard;
+import effect.ChangeAttackable;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Hidden extends ActiveCard {
@@ -16,8 +18,13 @@ public class Hidden extends ActiveCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        Pipe opponent = players.get(current);
+        Effect[] effects = {new ChangeAttackable(opponent, false)};
+        center.broadcast(current.getCharacter().getName() + "默默的蹲了下去");
+        return new ArrayList<>(Arrays.asList(effects));
+
     }
+
 
     @Override
     public int getCost() {

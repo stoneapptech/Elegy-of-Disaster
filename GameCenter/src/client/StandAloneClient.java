@@ -3,6 +3,7 @@ package client;
 import EODObject.Cards;
 import card.Card;
 import card.active.ActiveCard;
+import card.aggressive.AggressiveCard;
 import card.passive.PassiveCard;
 import character.Character;
 import exceptions.ChooseZeroException;
@@ -76,13 +77,23 @@ public class StandAloneClient extends Client {
 
     @Override
     public void onChooseCard(Cards hand) throws ChooseZeroException {
-        showCards(hand, card -> card instanceof ActiveCard, "不可出");
+        Predicate<Card> predicate = new Predicate<Card>() {
+            @Override
+            public boolean test(Card card) {
+                boolean canAttack = pipe.getCanAttack();
+                if(card instanceof AggressiveCard) {
+                    return canAttack;
+                }
+                return card instanceof ActiveCard;
+            }
+        };
+        showCards(hand, predicate, "不可出");
         while(true) {
             int num = inputMethod.getNumber();
             if(num == 0) {
                 throw new ChooseZeroException();
             } else if(num > 0 && num <= hand.size()) {
-                if(hand.get(num-1) instanceof PassiveCard) {
+                if(!predicate.test(hand.get(num-1))) {
                     continue;
                 }
                 cost -= ((ActiveCard)hand.get(num-1)).getCost();
