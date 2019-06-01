@@ -1,9 +1,11 @@
 package EODObject;
 
 import card.Card;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -73,7 +75,6 @@ public class Cards implements Iterable<Card> {
 
 
     //support foreach
-    @NotNull
     @Override
     public Iterator<Card> iterator() {
         return cardArray.iterator();
