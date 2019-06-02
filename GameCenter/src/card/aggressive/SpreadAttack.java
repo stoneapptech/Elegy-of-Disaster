@@ -2,13 +2,15 @@ package card.aggressive;
 
 import card.SpecialCard;
 import card.active.ActiveCard;
-import card.aggressive.AggressiveCard;
+import effect.DamageLife;
 import effect.Effect;
 import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 public class SpreadAttack extends ActiveCard implements AggressiveCard, SpecialCard {
     @Override
@@ -18,7 +20,10 @@ public class SpreadAttack extends ActiveCard implements AggressiveCard, SpecialC
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        return null;
+        int attackTime = new Random().nextInt(6);
+        Effect[] effects = new Effect[attackTime];
+        Arrays.fill(effects, new DamageLife(1, players.get(current)));
+        return new ArrayList<>(Arrays.asList(effects));
     }
 
     @Override
