@@ -37,6 +37,9 @@ public abstract class GameCenter {
     private HashMap<Pipe, Boolean> canAttack = new HashMap<>();
     //use null to represent that the pipe has not properties
     private HashMap<Pipe, Property> properties = new HashMap<>();
+    public Property getPropertyOf(Pipe pipe) {
+        return properties.get(pipe);
+    }
 
     public void begin(Client... clients) {
         setup(clients);
@@ -115,6 +118,11 @@ public abstract class GameCenter {
                     current.requirePlayCard(hands.get(current));
                 } catch (ChooseZeroException e) {
                     current.activateBuffer(current, players, this);
+                    properties.forEach((pipe, property) -> {
+                        if(property != null && property.shouldDisappear()) {
+                            properties.put(pipe, null);
+                        }
+                    });
                     break;
                 }
                 if (!canAttack.get(current)){
@@ -208,5 +216,8 @@ public abstract class GameCenter {
 
     public boolean getCanAttack(Pipe pipe) {
         return canAttack.get(pipe);
+    }
+    public void placeProperty(Pipe pipe, Property property) {
+        properties.put(pipe, property);
     }
 }

@@ -1,10 +1,11 @@
 package pipe;
 
+import EODObject.Attackable;
 import EODObject.Cards;
 import card.Card;
 import card.SpecialCard;
-import card.active.EffectStorer;
 import card.active.ActiveCard;
+import card.active.EffectStorer;
 import card.aggressive.AggressiveCard;
 import card.aggressive.Snipe;
 import card.passive.PassiveCard;
@@ -13,12 +14,13 @@ import client.Client;
 import effect.Effect;
 import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
+import propperty.Property;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Pipe {
+public class Pipe implements Attackable {
 
     private GameCenter center;
     public Client client;
@@ -161,6 +163,9 @@ public class Pipe {
 
     public void addCardToHand(Card c) {
         center.addToHand(c, this);
+    }
+    public void placeProperty(Property property) {
+        center.placeProperty(this, property);
     }
 
     @Override

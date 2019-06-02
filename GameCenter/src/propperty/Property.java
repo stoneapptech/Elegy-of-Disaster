@@ -1,6 +1,7 @@
 package propperty;
 
-public abstract class Property {
-    public abstract boolean shouldDisappear();
+import EODObject.Attackable;
 
+public abstract class Property implements Attackable {
+    public abstract boolean shouldDisappear();
 }

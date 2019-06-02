@@ -1,16 +1,17 @@
 package effect;
 
-import pipe.Pipe;
+import EODObject.Attackable;
 
 public class DamageLife extends Effect {
 
-    private Pipe subject;
+    private Attackable subject;
     private int life;
 
-    public DamageLife(int life, Pipe pipe) {
-        this.subject = pipe;
+    public DamageLife(int life, Attackable attackable) {
+        this.subject = attackable;
         this.life = life;
     }
+
 
     @Override
     public String getDescription() {
