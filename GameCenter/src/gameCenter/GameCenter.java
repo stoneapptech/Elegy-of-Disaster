@@ -11,6 +11,7 @@ import exceptions.ChooseZeroException;
 import exceptions.NoOneLostException;
 import pipe.Pipe;
 import pipe.Pipes;
+import propperty.Property;
 
 import java.util.HashMap;
 
@@ -32,10 +33,10 @@ public abstract class GameCenter {
     //use this map to record the order of players
     //the value is the next player after the key
     private HashMap<Pipe, Pipe> players = new HashMap<>();
-
     private HashMap<Pipe, Boolean> canDefense = new HashMap<>();
-
     private HashMap<Pipe, Boolean> canAttack = new HashMap<>();
+    //use null to represent that the pipe has not properties
+    private HashMap<Pipe, Property> properties = new HashMap<>();
 
     public void begin(Client... clients) {
         setup(clients);
@@ -68,9 +69,8 @@ public abstract class GameCenter {
         }
         for(Pipe p:pipes) {
             canDefense.put(p, true);
-        }
-        for(Pipe p:pipes) {
             canAttack.put(p, true);
+            properties.put(p, null);
         }
     }
 
