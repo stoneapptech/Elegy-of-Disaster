@@ -101,13 +101,11 @@ public abstract class Character {
         return poisoned;
     }
 
-    public void setPoisoned(int point) {
-        if(point > 0) {
-            poisoned += point;
-        }
-        else {
-            poisoned = 0;
-        }
+    public void increasePoisoned(int point) {
+        poisoned += point;
+    }
+    public void restorePoisoned() {
+        poisoned = 0;
     }
 
     public void setDamageVariation(int point) {

@@ -27,7 +27,7 @@ public class Poison extends ActiveCard implements SpecialCard {
             public Boolean get() {
                 return current.getCardFromBuffer(-1) instanceof AggressiveCard;
             }
-        })};
+        }, 2)};
         return new ArrayList<>(Arrays.asList(effects));
     }
 

@@ -9,7 +9,7 @@ public class RemoveNegative extends Effect {
     }
     @Override
     public boolean invoke() {
-        subject.setPoisoned(0);
+        subject.restorePoisoned();
         return true;
     }
 }

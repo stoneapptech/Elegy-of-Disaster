@@ -17,14 +17,14 @@ public class Bless extends ActiveCard implements SpecialCard {
 
     @Override
     public ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
-        Effect[] effects = {new RemoveNegative(current), new DecreasedDamage(1, current), new InvokeIf(new IncreasedDamage(1, current), new Supplier<Boolean>() {
+        Effect[] effects = {new RemoveNegative(current), new AddLife(3, current), new DecreasedDamage(1, current), new InvokeIf(new IncreasedDamage(1, current), new Supplier<Boolean>() {
             int turn = 0;
             @Override
             public Boolean get() {
                 turn++;
                 return turn == 3;
             }
-        })};
+        }, -1)};
         return new ArrayList<>(Arrays.asList(effects));
     }
 

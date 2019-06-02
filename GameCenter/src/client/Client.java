@@ -72,8 +72,12 @@ public abstract class Client {
         cost -= c;
     }
 
-    public void setPoisoned(int point) {
-        character.setPoisoned(point);
+    public void increasePoisoned(int point) {
+        character.increasePoisoned(point);
+    }
+
+    public void restorePoisoned() {
+        character.restorePoisoned();
     }
 
     public void decreasedDamage(int point) {

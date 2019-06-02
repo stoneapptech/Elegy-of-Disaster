@@ -12,7 +12,7 @@ public class Poisoning extends Effect {
 
     @Override
     public boolean invoke() {
-        subject.setPoisoned(point);
+        subject.increasePoisoned(point);
         return true;
     }
 }

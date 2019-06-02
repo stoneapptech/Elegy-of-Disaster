@@ -13,7 +13,8 @@ public class AddCardToHand extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         subject.addCardToHand(card);
+        return true;
     }
 }

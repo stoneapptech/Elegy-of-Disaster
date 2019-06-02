@@ -68,14 +68,14 @@ public class Pipe {
         ArrayList<Effect> remainEffects = new ArrayList<>();
         for(Card c: cardBuffer) {
             if(c instanceof ActiveCard) {
-                remainEffects.addAll(((ActiveCard) c).applyEffects(current, players, center));
+                ActiveCard card = (ActiveCard) c;
+                ArrayList<Effect> invocationLacked = card.applyEffects(current, players, center);
+                remainEffects.addAll(invocationLacked);
             }
             if(c instanceof PassiveCard) {
                 ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
-
-
 
         boolean successfullyAttacked = false;
         if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
@@ -120,6 +120,9 @@ public class Pipe {
     }
 
     public void decreaseLife(int num) {
+        if(num <= 0) {
+            return;
+        }
         client.onDamaged(num);
     }
 
@@ -189,8 +192,12 @@ public class Pipe {
         client.consumeCost(cost);
     }
 
-    public void setPoisoned(int point) {
-        client.setPoisoned(point);
+    public void increasePoisoned(int point) {
+        client.increasePoisoned(point);
+    }
+
+    public void restorePoisoned() {
+        client.restorePoisoned();
     }
 
     public void decreasedDamage(int point) {
