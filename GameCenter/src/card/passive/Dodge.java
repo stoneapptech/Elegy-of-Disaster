@@ -1,6 +1,5 @@
 package card.passive;
 
-import card.passive.PassiveCard;
 import effect.Effect;
 import effect.InvalidateAggressive;
 import gameCenter.GameCenter;
@@ -24,7 +23,7 @@ public class Dodge extends PassiveCard {
     @Override
     protected ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         Effect[] effects = {new InvalidateAggressive(current)};
-        center.broadcast(current.getCharacter().getName() + "縱身一躍，躲過了攻擊");
+        center.broadcast(players.get(current).getCharacter().getName() + "縱身一躍，躲過了攻擊");
         return new ArrayList<>(Arrays.asList(effects));
     }
 }
