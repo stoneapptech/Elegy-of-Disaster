@@ -13,6 +13,6 @@ public class Transcender extends Character {
 
     @Override
     int[] getDeckCardsCount() {
-        return new int[]{1, 1, 3, 3, 5, 9, 4, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+        return new int[]{7, 5, 5, 5, 5, 5, 3, 3, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 10, 0, 1, 0, 0, 0, 0};
     }
 }

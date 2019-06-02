@@ -13,6 +13,9 @@ import pipe.Pipe;
 import pipe.Pipes;
 import propperty.Property;
 
+import java.util.*;
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
 import java.util.HashMap;
 
 public abstract class GameCenter {
@@ -216,6 +219,26 @@ public abstract class GameCenter {
 
     public boolean getCanAttack(Pipe pipe) {
         return canAttack.get(pipe);
+    }
+
+    public HashMap<Pipe, Cards> sendHands(){
+        return hands;
+    }
+
+    public Cards lookRandomCard(Pipe pipe, int num) {
+        Cards hand = hands.get(pipe);
+        Cards looked = new Cards();
+        ArrayList<Integer> ints = new ArrayList<>();
+        new Random().ints(hand.size(), 0, hand.size()).forEach(new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                if(!ints.contains(value) && ints.size()<num) {
+                    ints.add(value);
+                    looked.add(hand.get(value));
+                }
+            }
+        });
+        return looked;
     }
     public void placeProperty(Pipe pipe, Property property) {
         properties.put(pipe, property);

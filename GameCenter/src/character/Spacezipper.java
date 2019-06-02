@@ -20,7 +20,7 @@ public class Spacezipper extends Character {
 
     @Override
     int[] getDeckCardsCount() {
-        return new int[]{7, 5, 5, 5, 5, 5, 3, 3, 1, 1, 1, 1, 1, 1, 1, 100, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        return new int[]{7, 5, 5, 5, 5, 5, 3, 3, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0};
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Spacezipper extends Character {
                                      Pipe owner, HashMap<Pipe, Pipe> players) {
         super.onAttackSuccessfully(outputMethod, inputMethod, owner, players);
         conditionPoint++;
-//        outputMethod.send("龜月:\n" + "成功攻擊\n" + "請選擇下列一項發動");
+//        outputMethod.send("圭月:\n" + "成功攻擊\n" + "請選擇下列一項發動");
 //        Effect[][] effects = {
 //                {new DamageLife(2, players.get(owner))},
 //                {new DamageLife(1, players.get(owner)), new LoseCard(players.get(owner))},

@@ -36,60 +36,71 @@ public class Pipe implements Attackable {
     public Character getCharacter() {
         return client.getCharacter();
     }
+
     public void send(String message) {
         client.onMessage(message);
     }
+
     public int askingForLife() {
         return client.getCharacterLife();
     }
+
     public void receivedCard(Card card) {
         client.onReceivedCard(card);
     }
+
     public void receivedCards(Cards cards) {
-        for(Card c: cards) {
+        for (Card c : cards) {
             client.onReceivedCard(c);
         }
     }
+
     public void startNextTurn() {
         client.onNextTurn();
     }
+
     public void displayLife() {
         client.displayLife();
     }
+
     public void requirePlayCard(Cards hand) throws ChooseZeroException {
         client.onChooseCard(hand);
     }
+
     public int getAvailableCost() {
         return client.getAvailableCost();
     }
+
     public void askDefend(Cards cards) {
         client.onAskedDefend(cards);
     }
+
     //return whether successfully attacked
     public boolean activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
         ArrayList<Effect> remainEffects = new ArrayList<>();
-        for(Card c: cardBuffer) {
-            if(c instanceof ActiveCard) {
+        for (Card c : cardBuffer) {
+            if (c instanceof ActiveCard) {
                 ActiveCard card = (ActiveCard) c;
                 ArrayList<Effect> invocationLacked = card.applyEffects(current, players, center);
                 remainEffects.addAll(invocationLacked);
             }
-            if(c instanceof PassiveCard) {
+            if (c instanceof PassiveCard) {
                 ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
 
         boolean successfullyAttacked = false;
-        if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
+        if (cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
             successfullyAttacked = true;
         }
         cardBuffer.clear();
-        if(!remainEffects.isEmpty()) {
+        if (!remainEffects.isEmpty()) {
             appendCardToBuffer(new EffectStorer(remainEffects));
         }
 
         return successfullyAttacked;
     }
+
     public void onLoseCard(Card c) {
         client.onLoseCard(c);
     }
@@ -104,11 +115,13 @@ public class Pipe implements Attackable {
     public void playCard(int number) {
         center.onClientPlayCard(number);
     }
+
     public void playDefensiveCard(int number) {
         center.onClientPlayDefensive(number);
     }
+
     public void addCardToHand(int number, Cards cards) {
-        Card c = cards.get(number-1);
+        Card c = cards.get(number - 1);
         center.addToHand(c, this);
     }
 
@@ -122,7 +135,7 @@ public class Pipe implements Attackable {
     }
 
     public void decreaseLife(int num) {
-        if(num <= 0) {
+        if (num <= 0) {
             return;
         }
         client.onDamaged(num);
@@ -130,7 +143,7 @@ public class Pipe implements Attackable {
 
     public void invalidateAggressive() {
         cardBuffer.removeIf(card -> {
-            if(card instanceof AggressiveCard) {
+            if (card instanceof AggressiveCard) {
                 return !(card instanceof Snipe) || new Random().nextBoolean();
             }
             return false;
@@ -148,12 +161,15 @@ public class Pipe implements Attackable {
     public void insertCardToBufferHead(Card c) {
         cardBuffer.add(0, c);
     }
+
     public void appendCardToBuffer(Card c) {
         cardBuffer.add(c);
     }
+
     public Card loseRandomCard() {
         return center.loseCardOn(this);
     }
+
     public Card getCardFromBuffer(int index) {
         if (index < 0) {
             index = cardBuffer.size() + index;
@@ -164,6 +180,7 @@ public class Pipe implements Attackable {
     public void addCardToHand(Card c) {
         center.addToHand(c, this);
     }
+
     public void placeProperty(Property property) {
         center.placeProperty(this, property);
     }
@@ -178,7 +195,7 @@ public class Pipe implements Attackable {
             return card instanceof SpecialCard;
         });
         Cards firstThree = new Cards();
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             firstThree.add(specialCards.get(i));
         }
         client.onAskedAddToHand(firstThree);
@@ -195,6 +212,10 @@ public class Pipe implements Attackable {
 
     public void consumeCost(int cost) {
         client.consumeCost(cost);
+    }
+
+    public Cards lookRandomHand(int num) {
+        return center.lookRandomCard(this, num);
     }
 
     public void increasePoisoned(int point) {
