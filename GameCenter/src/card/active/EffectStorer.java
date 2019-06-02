@@ -7,6 +7,8 @@ import pipe.Pipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//This card should never be used from the user
+//This a effect container that will store effect temporary for next time uses
 public class EffectStorer extends ActiveCard {
     ArrayList<Effect> remainEffects;
     public EffectStorer(ArrayList<Effect> remainEffects) {
@@ -19,7 +21,7 @@ public class EffectStorer extends ActiveCard {
 
     @Override
     protected int getId() {
-        return 0;
+        return -1;
     }
 
     @Override
