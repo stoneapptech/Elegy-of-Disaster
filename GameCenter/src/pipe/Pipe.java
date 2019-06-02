@@ -3,15 +3,18 @@ package pipe;
 import EODObject.Cards;
 import card.Card;
 import card.SpecialCard;
+import card.active.EffectStorer;
 import card.active.ActiveCard;
 import card.aggressive.AggressiveCard;
 import card.aggressive.Snipe;
 import card.passive.PassiveCard;
 import character.Character;
 import client.Client;
+import effect.Effect;
 import exceptions.ChooseZeroException;
 import gameCenter.GameCenter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -62,19 +65,27 @@ public class Pipe {
     }
     //return whether successfully attacked
     public boolean activateBuffer(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        ArrayList<Effect> remainEffects = new ArrayList<>();
         for(Card c: cardBuffer) {
             if(c instanceof ActiveCard) {
-                ((ActiveCard) c).applyEffects(current, players, center);
+                remainEffects.addAll(((ActiveCard) c).applyEffects(current, players, center));
             }
             if(c instanceof PassiveCard) {
                 ((PassiveCard) c).applyPassiveSkill(current, players, center);
             }
         }
+
+
+
         boolean successfullyAttacked = false;
         if(cardBuffer.filter(x -> x instanceof AggressiveCard).size() > 0) {
             successfullyAttacked = true;
         }
         cardBuffer.clear();
+        if(!remainEffects.isEmpty()) {
+            appendCardToBuffer(new EffectStorer(remainEffects));
+        }
+
         return successfullyAttacked;
     }
     public void onLoseCard(Card c) {
@@ -144,6 +155,7 @@ public class Pipe {
         }
         return cardBuffer.get(index);
     }
+
     public void addCardToHand(Card c) {
         center.addToHand(c, this);
     }
@@ -176,8 +188,16 @@ public class Pipe {
     public void consumeCost(int cost) {
         client.consumeCost(cost);
     }
-    public void showCard(int a) {
 
+    public void setPoisoned(int point) {
+        client.setPoisoned(point);
+    }
+
+    public void decreasedDamage(int point) {
+        client.decreasedDamage(point);
+    }
+
+    public void IncreasedDamage(int point) {
+        client.increasedDamage(point);
     }
 }
-

@@ -14,7 +14,8 @@ public class ChangeDefensible extends Effect{
 
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         this.opponent.changeDefensible(this.status);
+        return true;
     }
 }

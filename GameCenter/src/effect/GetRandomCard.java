@@ -14,8 +14,9 @@ public class GetRandomCard extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         Card lost = giver.loseRandomCard();
         receiver.receivedCard(lost);
+        return true;
     }
 }

@@ -1,9 +1,5 @@
 package character;
 
-import card.Card;
-
-import java.util.ArrayList;
-
 public class GodSight extends Character {
 
     public GodSight() {

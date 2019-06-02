@@ -10,7 +10,7 @@ public class LookOpponentCard extends Effect{
 
     @Override
 
-    public void invoke() {
-        return;
+    public boolean invoke() {
+        return true;
     }
 }

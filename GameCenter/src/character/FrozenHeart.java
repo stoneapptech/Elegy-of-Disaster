@@ -1,9 +1,5 @@
 package character;
 
-import card.Card;
-
-import java.util.ArrayList;
-
 public class FrozenHeart extends Character {
 
     public FrozenHeart() {

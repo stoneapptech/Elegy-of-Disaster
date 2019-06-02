@@ -114,7 +114,7 @@ public abstract class GameCenter {
                 try {
                     current.requirePlayCard(hands.get(current));
                 } catch (ChooseZeroException e) {
-                    //user choose zero
+                    current.activateBuffer(current, players, this);
                     break;
                 }
                 if (!canAttack.get(current)){

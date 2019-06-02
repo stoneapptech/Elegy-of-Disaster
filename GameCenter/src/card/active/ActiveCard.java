@@ -6,14 +6,17 @@ import gameCenter.GameCenter;
 import pipe.Pipe;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public abstract class ActiveCard extends Card {
-    public void applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+    public ArrayList<Effect> applyEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center) {
+        ArrayList<Effect> effects = new ArrayList<>();
         for(Effect e: getEffects(current, players, center)) {
-            e.invoke();
+            if(!e.invoke()) {
+                effects.add(e);
+            }
         }
+        return effects;
     }
     protected abstract ArrayList<Effect> getEffects(Pipe current, HashMap<Pipe, Pipe> players, GameCenter center);
     public abstract int getCost();

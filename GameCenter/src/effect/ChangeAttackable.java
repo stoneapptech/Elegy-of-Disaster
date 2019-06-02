@@ -13,7 +13,8 @@ public class ChangeAttackable extends Effect{
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         this.opponent.changeAttackable(this.status);
+        return true;
     }
 }

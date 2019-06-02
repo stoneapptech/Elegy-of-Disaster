@@ -41,6 +41,14 @@ public abstract class Client {
     public void onNextTurn() {
         turn++;
         cost = turn>2 ? 3:turn;
+
+        if(character.getPoisoned() > 0) {
+            poisonDamage();
+        }
+    }
+
+    protected void poisonDamage() {
+        character.decreaseLifeBy(character.getPoisoned());
     }
 
     public void onAttackSuccessfully(Pipe owner, HashMap<Pipe, Pipe> players) {
@@ -62,5 +70,16 @@ public abstract class Client {
 
     public void consumeCost(int c) {
         cost -= c;
+    }
+
+    public void setPoisoned(int point) {
+        character.setPoisoned(point);
+    }
+
+    public void decreasedDamage(int point) {
+        character.setDamageVariation(-point);
+    }
+    public void increasedDamage(int point) {
+        character.setDamageVariation(point);
     }
 }

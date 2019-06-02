@@ -1,7 +1,7 @@
 package effect;
 
 public abstract class Effect {
-    abstract public void invoke();
+    abstract public boolean invoke();
     public String getDescription() {
         return null;
     }

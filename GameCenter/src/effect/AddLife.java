@@ -19,7 +19,8 @@ public class AddLife extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         subject.increaseLife(life);
+        return true;
     }
 }

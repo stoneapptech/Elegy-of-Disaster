@@ -17,7 +17,8 @@ public class DrawCard extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         subject.drawCard(num);
+        return true;
     }
 }

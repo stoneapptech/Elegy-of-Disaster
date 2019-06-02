@@ -10,7 +10,8 @@ public class InvalidateAggressive extends Effect {
     }
 
     @Override
-    public void invoke() {
+    public boolean invoke() {
         subject.invalidateAggressive();
+        return true;
     }
 }

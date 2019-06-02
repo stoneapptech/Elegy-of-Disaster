@@ -1,6 +1,5 @@
 package card.aggressive;
 
-import card.Card;
 import card.active.ActiveCard;
 import effect.DamageLife;
 import effect.Effect;

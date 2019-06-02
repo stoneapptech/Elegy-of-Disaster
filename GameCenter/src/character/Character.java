@@ -13,6 +13,9 @@ import java.util.HashMap;
 public abstract class Character {
 
     protected int life;
+    protected int poisoned;
+    private int damageVariation = 0;
+
     protected Character(int life) {
         this.life = life;
     }
@@ -30,8 +33,10 @@ public abstract class Character {
     public void decreaseLife() {
         decreaseLifeBy(1);
     }
-    public void decreaseLifeBy(int num) {
+    public int decreaseLifeBy(int num) {
+        num = num + damageVariation;
         life -= num;
+        return num;
     }
 
     public void onDefendSuccessfully(Output outputMethod, Input inputMethod,
@@ -90,5 +95,22 @@ public abstract class Character {
             deck = new Cards(initialDeck);
         }
         return deck;
+    }
+
+    public int getPoisoned() {
+        return poisoned;
+    }
+
+    public void setPoisoned(int point) {
+        if(point > 0) {
+            poisoned += point;
+        }
+        else {
+            poisoned = 0;
+        }
+    }
+
+    public void setDamageVariation(int point) {
+        damageVariation += point;
     }
 }
